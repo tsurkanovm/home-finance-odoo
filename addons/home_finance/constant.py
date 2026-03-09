@@ -1,0 +1,18 @@
+WALLET_ACCOUNT_TYPE = 'account'
+WALLET_INVEST_TYPE = 'invest'
+WALLET_CASH_TYPE = 'cash'
+
+MOVEMENT_TYPE_INCOME = 'income'
+MOVEMENT_TYPE_EXPENSE = 'expense'
+
+MOVEMENT_TYPE_SELECTION = [
+    (MOVEMENT_TYPE_INCOME, 'Income'),
+    (MOVEMENT_TYPE_EXPENSE, 'Expense'),
+]
+
+WALLET_TYPE_SELECTION = [
+    (WALLET_CASH_TYPE, 'Cash'),
+    (WALLET_ACCOUNT_TYPE, 'Account'),
+    (WALLET_INVEST_TYPE, 'Investment'),
+]
+

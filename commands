@@ -15,7 +15,7 @@ docker compose exec web bash
 odoo -d odoof -u ud_estate --stop-after-init  # inside the container
 
 #restart and update module:
-docker compose run --rm --entrypoint /usr/bin/odoo web --config /etc/odoo/odoo.conf -d odoof -u ud_estate --without-demo=all --stop-after-init
+docker compose --env-file env.local run --rm --entrypoint /usr/bin/odoo web --config /etc/odoo/odoo.conf -d home_finance -u home_finance --without-demo --stop-after-init
 
 #setup demo data (if demo data changes needs to drop demo DB)
 docker compose run --rm --entrypoint /usr/bin/odoo web --config /etc/odoo/odoo.conf -d odoof_demo -i ud_estate --with-demo --stop-after-init

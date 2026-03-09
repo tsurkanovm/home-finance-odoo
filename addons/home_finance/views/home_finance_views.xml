@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="hf_wallet_action" model="ir.actions.act_window">
+        <field name="name">Wallets</field>
+        <field name="res_model">home_finance.wallet</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+        <record id="hf_wallet_view_list" model="ir.ui.view">
+        <field name="name">home_finance.wallet.view.list</field>
+        <field name="model">home_finance.wallet</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="description"/>
+                <field name="type"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="hf_wallet_view_form" model="ir.ui.view">
+        <field name="name">home_finance.wallet.view.form</field>
+        <field name="model">home_finance.wallet</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="type"/>
+                        <field name="currency_id"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

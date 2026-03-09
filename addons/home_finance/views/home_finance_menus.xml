@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="hf_menu_root" name="Home Finance" sequence="10">
+        <menuitem id="hf_doc_menu" name="Documents" sequence="10">
+        </menuitem>
+        <menuitem id="hf_setting_menu" name="Settings" sequence="20">
+            <menuitem id="hf_wallet_model_menu_action"
+                      action="hf_wallet_action"
+                      sequence="10"
+                      name="Wallets"/>
+            <menuitem id="hf_currency_model_menu_action"
+                      action="base.action_currency_form"
+                      sequence="100"
+                      name="Currencies"/>
+        </menuitem>
+    </menuitem>
+</odoo>
