@@ -8,6 +8,10 @@
                       action="hf_wallet_action"
                       sequence="10"
                       name="Wallets"/>
+            <menuitem id="hf_category_model_menu_action"
+                      action="hf_category_action"
+                      sequence="20"
+                      name="Transaction Categories"/>
             <menuitem id="hf_currency_model_menu_action"
                       action="base.action_currency_form"
                       sequence="100"

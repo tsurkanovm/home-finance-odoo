@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 home_finance.access_wallet,access_wallet,home_finance.model_home_finance_wallet,base.group_user,1,1,1,1
+home_finance.access_category,access_category,home_finance.model_home_finance_category,base.group_user,1,1,1,1
