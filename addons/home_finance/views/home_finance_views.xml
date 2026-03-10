@@ -70,7 +70,7 @@
                             <field name="category_id"/>
                         </group>
                         <group>
-                            <field name="project_id"/>
+                            <field name="project_id" invisible="type=='expense'"/>
                             <field name="amount"/>
                             <field name="currency_id"/>
                         </group>
@@ -86,14 +86,15 @@
         <field name="name">home_finance.transaction.view.list</field>
         <field name="model">home_finance.transaction</field>
         <field name="arch" type="xml">
-            <list>
+            <list decoration-danger="type == 'expense'"
+                  decoration-success="type == 'income'">
                 <field name="period"/>
                 <field name="type"/>
                 <field name="wallet_id"/>
                 <field name="category_id"/>
-                <field name="project_id"/>
                 <field name="currency_id"/>
                 <field name="amount"/>
+                 <field name="project_id"/>
                 <field name="comment" optional="hide"/>
                 <field name="create_date" optional="hide"/>
             </list>
