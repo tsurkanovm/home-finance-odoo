@@ -2,24 +2,28 @@
 <odoo>
     <menuitem id="hf_menu_root" name="Home Finance" sequence="10">
         <menuitem id="hf_doc_menu" name="Documents" sequence="10">
+             <menuitem id="hf_transaction_model_menu_action"
+                      action="hf_transaction_action"
+                      sequence="10"
+                      name="Transaction"/>
         </menuitem>
         <menuitem id="hf_setting_menu" name="Settings" sequence="20">
             <menuitem id="hf_wallet_model_menu_action"
                       action="hf_wallet_action"
                       sequence="10"
-                      name="Wallets"/>
+                      name="Wallet"/>
             <menuitem id="hf_category_model_menu_action"
                       action="hf_category_action"
                       sequence="20"
-                      name="Transaction Categories"/>
+                      name="Transaction Category"/>
             <menuitem id="hf_project_model_menu_action"
                       action="hf_project_action"
                       sequence="30"
-                      name="Transaction Projects"/>
+                      name="Transaction Project"/>
             <menuitem id="hf_currency_model_menu_action"
                       action="base.action_currency_form"
                       sequence="100"
-                      name="Currencies"/>
+                      name="Currency"/>
         </menuitem>
     </menuitem>
 </odoo>

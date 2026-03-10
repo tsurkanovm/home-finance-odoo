@@ -1,12 +1,14 @@
 <?xml version="1.0"?>
 <odoo>
+
+    <!-- Wallet views    -->
     <record id="hf_wallet_action" model="ir.actions.act_window">
         <field name="name">Wallets</field>
         <field name="res_model">home_finance.wallet</field>
         <field name="view_mode">list,form</field>
     </record>
 
-        <record id="hf_wallet_view_list" model="ir.ui.view">
+    <record id="hf_wallet_view_list" model="ir.ui.view">
         <field name="name">home_finance.wallet.view.list</field>
         <field name="model">home_finance.wallet</field>
         <field name="arch" type="xml">
@@ -34,16 +36,67 @@
         </field>
     </record>
 
-
+    <!-- Category views    -->
     <record id="hf_category_action" model="ir.actions.act_window">
         <field name="name">Transaction Categories</field>
         <field name="res_model">home_finance.category</field>
         <field name="view_mode">list,form</field>
     </record>
 
+    <!-- Project views    -->
     <record id="hf_project_action" model="ir.actions.act_window">
         <field name="name">Transaction Projects</field>
         <field name="res_model">home_finance.project</field>
         <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Transaction views    -->
+    <record id="hf_transaction_action" model="ir.actions.act_window">
+        <field name="name">Transactions</field>
+        <field name="res_model">home_finance.transaction</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="hf_transaction_view_form" model="ir.ui.view">
+        <field name="name">home_finance.transaction.view.form</field>
+        <field name="model">home_finance.transaction</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="period"/>
+                            <field name="type"/>
+                            <field name="wallet_id"/>
+                            <field name="category_id"/>
+                        </group>
+                        <group>
+                            <field name="project_id"/>
+                            <field name="amount"/>
+                            <field name="currency_id"/>
+                        </group>
+                    </group>
+                    <group>
+                      <field name="comment" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="hf_transaction_view_list" model="ir.ui.view">
+        <field name="name">home_finance.transaction.view.list</field>
+        <field name="model">home_finance.transaction</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="period"/>
+                <field name="type"/>
+                <field name="wallet_id"/>
+                <field name="category_id"/>
+                <field name="project_id"/>
+                <field name="currency_id"/>
+                <field name="amount"/>
+                <field name="comment" optional="hide"/>
+                <field name="create_date" optional="hide"/>
+            </list>
+        </field>
     </record>
 </odoo>

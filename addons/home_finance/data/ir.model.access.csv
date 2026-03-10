@@ -2,3 +2,5 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 home_finance.access_wallet,access_wallet,home_finance.model_home_finance_wallet,base.group_user,1,1,1,1
 home_finance.access_category,access_category,home_finance.model_home_finance_category,base.group_user,1,1,1,1
 home_finance.access_project,access_category,home_finance.model_home_finance_project,base.group_user,1,1,1,1
+home_finance.access_transaction,access_transaction,home_finance.model_home_finance_transaction,base.group_user,1,1,1,1
+home_finance.access_document,access_document,home_finance.model_home_finance_document,base.group_user,1,1,1,1
