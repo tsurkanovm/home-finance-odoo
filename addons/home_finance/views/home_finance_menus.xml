@@ -12,6 +12,10 @@
                       action="hf_category_action"
                       sequence="20"
                       name="Transaction Categories"/>
+            <menuitem id="hf_project_model_menu_action"
+                      action="hf_project_action"
+                      sequence="30"
+                      name="Transaction Projects"/>
             <menuitem id="hf_currency_model_menu_action"
                       action="base.action_currency_form"
                       sequence="100"
