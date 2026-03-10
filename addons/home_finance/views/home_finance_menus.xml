@@ -6,6 +6,10 @@
                       action="hf_transaction_action"
                       sequence="10"
                       name="Transaction"/>
+            <menuitem id="hf_transfer_model_menu_action"
+                      action="hf_transfer_action"
+                      sequence="20"
+                      name="Transfer"/>
         </menuitem>
         <menuitem id="hf_setting_menu" name="Settings" sequence="20">
             <menuitem id="hf_wallet_model_menu_action"
