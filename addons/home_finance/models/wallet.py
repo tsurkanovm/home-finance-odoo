@@ -19,6 +19,8 @@ class Wallet(models.Model):
 
     expense_amount = fields.Monetary(string='Total Expenses', compute='_compute_expense_amount', currency_field='currency_id')
     income_amount = fields.Monetary(string='Total Incomes', compute='_compute_income_amount', currency_field='currency_id')
+    transfer_out_amount = fields.Monetary(string='Total Transfers Out', compute='_compute_transfer_out_amount', currency_field='currency_id')
+    transfer_in_amount = fields.Monetary(string='Total Transfers In', compute='_compute_transfer_in_amount', currency_field='currency_id')
 
     _check_name_uniqueness = models.Constraint(
         'unique(name)',
@@ -38,6 +40,20 @@ class Wallet(models.Model):
         for wallet in self:
             wallet.income_amount = sum(
                 transaction.amount for transaction in wallet.transaction_ids if transaction.type == 'income'
+            )
+
+    @api.depends('transfer_source_ids')
+    def _compute_transfer_out_amount(self):
+        for wallet in self:
+            wallet.transfer_out_amount = sum(
+                transfer.source_amount for transfer in wallet.transfer_source_ids
+            )
+
+    @api.depends('transfer_destination_ids')
+    def _compute_transfer_in_amount(self):
+        for wallet in self:
+            wallet.transfer_in_amount = sum(
+                transfer.destination_amount for transfer in wallet.transfer_destination_ids
             )
 
 
