@@ -9,10 +9,10 @@ class Transaction(models.Model):
 
     type = fields.Selection(string='Movement Type', required=True, selection=MOVEMENT_TYPE_SELECTION,
                             default=MOVEMENT_TYPE_EXPENSE) #@todo - replace by related field to category type, and two form views (one for expense, one for income)
-    wallet_id = fields.Many2one('home_finance.wallet', required=True, string='Wallet')
+    wallet_id = fields.Many2one('home_finance.wallet', required=True, string='Wallet', ondelete='restrict')
     category_id = fields.Many2one('home_finance.category', required=True, string='Category',
-                                  domain="[('type', '=', type)]")
-    project_id = fields.Many2one('home_finance.project', string='Project')
+                                  domain="[('type', '=', type)]", ondelete='restrict')
+    project_id = fields.Many2one('home_finance.project', string='Project', ondelete='restrict')
     currency_id = fields.Many2one('res.currency', string='Currency', related='wallet_id.currency_id', store=True,
                                   readonly=True)
     amount = fields.Monetary(string='Amount', required=True, currency_field='currency_id')
@@ -25,9 +25,7 @@ class Transaction(models.Model):
     name = fields.Char(string='Transaction Name', compute='_compute_name')
 
 
-    # -------------------------------------------------------------------------
     # COMPUTE METHODS
-    # -------------------------------------------------------------------------
     @api.depends('type', 'category_id', 'amount')
     def _compute_name(self):
         for transaction in self:
