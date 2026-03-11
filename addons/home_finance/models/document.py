@@ -1,5 +1,5 @@
-from odoo import models, fields, api
 from dateutil.relativedelta import relativedelta
+from odoo import models, fields, api
 
 class Document(models.AbstractModel):
     _name = 'home_finance.document'

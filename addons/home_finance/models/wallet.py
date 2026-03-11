@@ -10,10 +10,3 @@ class Wallet(models.Model):
     type = fields.Selection(string='Type', required=True, selection=WALLET_TYPE_SELECTION, default=WALLET_ACCOUNT_TYPE)
     currency_id = fields.Many2one('res.currency', string='Currency', required=True, default=lambda self: self.env.company.currency_id)
     active = fields.Boolean(string='Active', default=True)
-
-    description = fields.Text(string='Description', compute='_compute_description')
-
-    @api.depends('name', 'currency_id')
-    def _compute_description(self):
-        for wallet in self:
-            wallet.description = f"{wallet.name} - {wallet.currency_id.name}"

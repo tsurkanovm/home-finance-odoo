@@ -7,23 +7,45 @@ class Transaction(models.Model):
     _inherit = 'home_finance.document'
     _description='Home Finance Transaction'
 
-
-    #registration_date = fields.Datetime(string='Registration Date', default=fields.Datetime.now)
-
-    type = fields.Selection(string='Movement Type', required=True, selection=MOVEMENT_TYPE_SELECTION, default=MOVEMENT_TYPE_EXPENSE)
+    type = fields.Selection(string='Movement Type', required=True, selection=MOVEMENT_TYPE_SELECTION,
+                            default=MOVEMENT_TYPE_EXPENSE) #@todo - replace by related field to category type, and two form views (one for expense, one for income)
     wallet_id = fields.Many2one('home_finance.wallet', required=True, string='Wallet')
-    category_id = fields.Many2one('home_finance.category', required=True, string='Category', domain="[('type', '=', type)]")
+    category_id = fields.Many2one('home_finance.category', required=True, string='Category',
+                                  domain="[('type', '=', type)]")
     project_id = fields.Many2one('home_finance.project', string='Project')
-    currency_id = fields.Many2one('res.currency', string='Currency', required=True, default=lambda self: self.env.company.currency_id)
-    amount = fields.Monetary(string='Amount', required=True)
+    currency_id = fields.Many2one('res.currency', string='Currency', related='wallet_id.currency_id', store=True,
+                                  readonly=True)
+    amount = fields.Monetary(string='Amount', required=True, currency_field='currency_id')
+    base_currency_id = fields.Many2one('res.currency', string='Base Currency',
+                                       default=lambda self: self.env.company.currency_id, store=True,
+                                       readonly=True)
+    base_amount = fields.Monetary(string='Base Amount', compute='_compute_base_amount',
+                                  currency_field='base_currency_id', store=True, readonly=True)
 
     name = fields.Char(string='Transaction Name', compute='_compute_name')
 
-    @api.depends('type', 'category_id', 'currency_id', 'amount')
+
+    # -------------------------------------------------------------------------
+    # COMPUTE METHODS
+    # -------------------------------------------------------------------------
+    @api.depends('type', 'category_id', 'amount')
     def _compute_name(self):
         for transaction in self:
-            if transaction.category_id and transaction.amount:
+            if transaction.category_id and transaction.amount and transaction.wallet_id:
                 transaction.name \
                     = f"{transaction.category_id.name} - {transaction.amount} {transaction.currency_id.name}"
             else:
                 transaction.name = _("New Transaction")
+
+    @api.depends('amount', 'currency_id', 'base_currency_id', 'period')
+    def _compute_base_amount(self):
+        for transaction in self:
+            if transaction.amount and transaction.currency_id and transaction.base_currency_id:
+                transaction.base_amount = self.env['res.currency'].browse(transaction.currency_id.id)._convert(
+                    transaction.amount,
+                    transaction.base_currency_id,
+                    self.env.company,
+                    transaction.period
+                )
+            else:
+                transaction.base_amount = 0.0

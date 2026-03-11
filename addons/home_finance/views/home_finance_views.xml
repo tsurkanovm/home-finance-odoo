@@ -13,7 +13,7 @@
         <field name="model">home_finance.wallet</field>
         <field name="arch" type="xml">
             <list>
-                <field name="description"/>
+                <field name="name"/>
                 <field name="type"/>
             </list>
         </field>
