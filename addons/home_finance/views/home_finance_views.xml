@@ -54,7 +54,7 @@
     <record id="hf_transaction_action" model="ir.actions.act_window">
         <field name="name">Transactions</field>
         <field name="res_model">home_finance.transaction</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,form,pivot</field>
     </record>
     <record id="hf_transaction_view_form" model="ir.ui.view">
         <field name="name">home_finance.transaction.view.form</field>
@@ -76,7 +76,7 @@
                         </group>
                     </group>
                     <group>
-                      <field name="comment" colspan="2"/>
+                        <field name="comment" colspan="2"/>
                     </group>
                 </sheet>
             </form>
@@ -94,10 +94,40 @@
                 <field name="category_id"/>
                 <field name="currency_id"/>
                 <field name="amount"/>
-                 <field name="project_id"/>
+                <field name="project_id"/>
                 <field name="comment" optional="hide"/>
                 <field name="create_date" optional="hide"/>
             </list>
+        </field>
+    </record>
+    <record id="hf_transaction_view_pivot" model="ir.ui.view">
+        <field name="name">home_finance.transaction.view.pivot</field>
+        <field name="model">home_finance.transaction</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <!--                <field name="period" type="column"/>-->
+                <field name="project_id" type="column"/>
+                <field name="category_id" type="row"/>
+                <field name="base_amount" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="hf_transaction_view_filter" model="ir.ui.view">
+        <field name="name">home_finance.transaction.view.filter</field>
+        <field name="model">home_finance.transaction</field>
+        <field name="arch" type="xml">
+            <search string="Transactions">
+                <field name="period"/>
+                <field name="type"/>
+                <field name="wallet_id"/>
+                <field name="category_id"/>
+                <field name="project_id"/>
+                <group>
+                    <filter name="period" context="{'group_by': 'period'}"/>
+                    <filter name="currency_id" context="{'group_by': 'currency_id'}"/>
+                </group>
+            </search>
         </field>
     </record>
 
@@ -114,7 +144,7 @@
             <form>
                 <sheet>
                     <group>
-                         <field name="period"/>
+                        <field name="period"/>
                         <group string="From">
                             <field name="source_wallet_id"/>
                             <field name="source_amount"/>
@@ -127,10 +157,22 @@
                         </group>
                     </group>
                     <group>
-                      <field name="comment" colspan="2"/>
+                        <field name="comment" colspan="2"/>
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+    <record id="hf_transfer_view_filter" model="ir.ui.view">
+        <field name="name">home_finance.transfer.view.filter</field>
+        <field name="model">home_finance.transfer</field>
+        <field name="arch" type="xml">
+            <search string="Transfer">
+                <field name="period"/>
+                <group>
+                    <filter name="period" context="{'group_by': 'period'}"/>
+                </group>
+            </search>
         </field>
     </record>
     <record id="hf_transfer_view_list" model="ir.ui.view">
