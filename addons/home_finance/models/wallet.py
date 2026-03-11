@@ -13,10 +13,33 @@ class Wallet(models.Model):
                                   default=lambda self: self.env.company.currency_id)
     active = fields.Boolean(string='Active', default=True)
 
+    transaction_ids = fields.One2many('home_finance.transaction', 'wallet_id', string='Transactions')
+    transfer_source_ids = fields.One2many('home_finance.transfer', 'source_wallet_id', string='Transfers From This Wallet')
+    transfer_destination_ids = fields.One2many('home_finance.transfer', 'destination_wallet_id', string='Transfers To This Wallet')
+
+    expense_amount = fields.Monetary(string='Total Expenses', compute='_compute_expense_amount', currency_field='currency_id')
+    income_amount = fields.Monetary(string='Total Incomes', compute='_compute_income_amount', currency_field='currency_id')
+
     _check_name_uniqueness = models.Constraint(
         'unique(name)',
         'The wallet name must be unique!'
     )
+
+    # COMPUTE METHODS
+    @api.depends('transaction_ids')
+    def _compute_expense_amount(self):
+        for wallet in self:
+            wallet.expense_amount = sum(
+                transaction.amount for transaction in wallet.transaction_ids if transaction.type == 'expense'
+            )
+
+    @api.depends('transaction_ids')
+    def _compute_income_amount(self):
+        for wallet in self:
+            wallet.income_amount = sum(
+                transaction.amount for transaction in wallet.transaction_ids if transaction.type == 'income'
+            )
+
 
     # CRUD METHODS
     def write(self, vals):
