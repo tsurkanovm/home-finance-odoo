@@ -5,3 +5,4 @@ home_finance.access_project,access_category,home_finance.model_home_finance_proj
 home_finance.access_document,access_document,home_finance.model_home_finance_document,base.group_user,1,1,1,1
 home_finance.access_transaction,access_transaction,home_finance.model_home_finance_transaction,base.group_user,1,1,1,1
 home_finance.access_transfer,access_transfer,home_finance.model_home_finance_transfer,base.group_user,1,1,1,1
+home_finance.access_document.import.wizard,access_document.import.wizard,home_finance.model_home_finance_document_import_wizard,base.group_user,1,1,1,1

@@ -1,6 +1,6 @@
 FROM odoo:latest
 
 USER root
-RUN pip3 install --no-cache-dir --break-system-packages "pydevd-pycharm~=253.0"
-
+COPY requirements.txt /tmp/requirements.txt
+RUN pip3 install --no-cache-dir --break-system-packages -r /tmp/requirements.txt
 USER odoo

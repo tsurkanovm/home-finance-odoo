@@ -10,7 +10,9 @@ docker compose --env-file env.local down -v
 docker compose --env-file env.local up -d
 
 docker compose --env-file env.local logs -f web
-docker compose restart web
+#restart web container
+docker compose --env-file env.local restart web
+
 docker compose exec web bash
 odoo -d odoof -u ud_estate --stop-after-init  # inside the container
 
@@ -20,5 +22,4 @@ docker compose --env-file env.local run --rm --entrypoint /usr/bin/odoo web --co
 #setup demo data (if demo data changes needs to drop demo DB)
 docker compose run --rm --entrypoint /usr/bin/odoo web --config /etc/odoo/odoo.conf -d odoof_demo -i ud_estate --with-demo --stop-after-init
 
-#this one no more work after debugpy setup:
-#docker compose run --rm web odoo -d odoof -u ud_estate --stop-after-init && docker compose restart web
+

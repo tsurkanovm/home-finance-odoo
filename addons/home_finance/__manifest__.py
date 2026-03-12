@@ -11,8 +11,8 @@
     'data': [
         'data/ir.model.access.csv',
         'views/home_finance_views.xml',
+        'wizard/home_finance_wizard_views.xml',
         'views/home_finance_menus.xml',
-
     ],
     "demo": [
     ],

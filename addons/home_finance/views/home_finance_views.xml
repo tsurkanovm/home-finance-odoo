@@ -49,7 +49,7 @@
         <field name="model">home_finance.transaction</field>
         <field name="arch" type="xml">
             <list decoration-danger="type == 'expense'"
-                  decoration-success="type == 'income'" editable="bottom">
+                  decoration-success="type == 'income'"  edit="1">
                 <field name="period"/>
                 <field name="type"/>
                 <field name="wallet_id"/>
@@ -103,13 +103,13 @@
         <field name="name">Transfers In</field>
         <field name="res_model">home_finance.transfer</field>
         <field name="view_mode">list</field>
-         <field name="domain">[('destination_wallet_id', '=', active_id)]</field>
+        <field name="domain">[('destination_wallet_id', '=', active_id)]</field>
     </record>
     <record id="hf_transfer_out_action" model="ir.actions.act_window">
         <field name="name">Transfers In</field>
         <field name="res_model">home_finance.transfer</field>
         <field name="view_mode">list</field>
-         <field name="domain">[('source_wallet_id', '=', active_id)]</field>
+        <field name="domain">[('source_wallet_id', '=', active_id)]</field>
     </record>
     <record id="hf_transfer_view_form" model="ir.ui.view">
         <field name="name">home_finance.transfer.view.form</field>
@@ -166,7 +166,7 @@
             </list>
         </field>
     </record>
-      <!-- Wallet views    -->
+    <!-- Wallet views    -->
     <record id="hf_wallet_action" model="ir.actions.act_window">
         <field name="name">Wallets</field>
         <field name="res_model">home_finance.wallet</field>

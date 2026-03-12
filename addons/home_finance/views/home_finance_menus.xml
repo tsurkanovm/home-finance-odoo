@@ -10,6 +10,11 @@
                       action="hf_transfer_action"
                       sequence="20"
                       name="Transfer"/>
+
+            <menuitem id="hf_document_import_wizard_menu_action"
+                      action="hf_document_import_wizard_action"
+                      sequence="40"
+                      name="Import Documents"/>
         </menuitem>
         <menuitem id="hf_setting_menu" name="Settings" sequence="20">
             <menuitem id="hf_wallet_model_menu_action"

@@ -7,8 +7,9 @@ class Transaction(models.Model):
     _inherit = 'home_finance.document'
     _description='Home Finance Transaction'
 
+    # @todo - replace by related field to category type, and two form views (one for expense, one for income)
     type = fields.Selection(string='Movement Type', required=True, selection=MOVEMENT_TYPE_SELECTION,
-                            default=MOVEMENT_TYPE_EXPENSE) #@todo - replace by related field to category type, and two form views (one for expense, one for income)
+                            default=MOVEMENT_TYPE_EXPENSE)
     wallet_id = fields.Many2one('home_finance.wallet', required=True, string='Wallet', ondelete='restrict')
     category_id = fields.Many2one('home_finance.category', required=True, string='Category',
                                   domain="[('type', '=', type)]", ondelete='restrict')
