@@ -2,33 +2,34 @@ import base64
 import io
 import pandas as pd
 from odoo import models, fields, api
-#@todo: delete
-class DocumentImportWizard(models.TransientModel):
-    _name = 'home_finance.document.import.wizard'
-    _description = 'Document Import Wizard'
+
+class StatementImport(models.Model):
+    _name = 'home_finance.statement.import'
+    _description = 'Bank Statement Import'
 
     period = fields.Date(string='Period', required=True, default=fields.Date.context_today)
     wallet_id = fields.Many2one('home_finance.wallet', string='Wallet', required=True)
     file = fields.Binary(string='File', required=True)
     filename = fields.Char(string='Filename')
+    line_ids = fields.One2many('home_finance.statement.import.line', 'statement_import_id', string='Statement Lines')
 
-    name = fields.Char(string='Import Name', compute='_compute_name')
+    name = fields.Char(string='Name', compute='_compute_name')
 
-    @api.depends('filename', 'wallet_id', 'period')
+    @api.depends('wallet_id', 'period')
     def _compute_name(self):
         for record in self:
             if record.filename and record.wallet_id and record.period:
-                record.name = f"Import {record.filename} for {record.wallet_id.name} on {record.period}"
+                record.name = f"Statement import for {record.wallet_id.name} on {record.period}"
             else:
-                record.name = "New Document Import"
+                record.name = "New Statement Import"
 
 
-    def action_import(self):
+    def action_parse(self):
         self.ensure_one()
-        self.import_xlsx()
-        return {'type': 'ir.actions.act_window_close'}
+        self.parse_xlsx()
+        #return {'type': 'ir.actions.act_window_close'}
 
-    def import_xlsx(self):
+    def parse_xlsx(self):
         # Decode the file content
         file_content = base64.b64decode(self.file)
 

@@ -261,4 +261,54 @@
         <field name="res_model">home_finance.project</field>
         <field name="view_mode">list,form</field>
     </record>
+
+        <!-- Statement Import views    -->
+    <record id="hf_statement_import_action" model="ir.actions.act_window">
+        <field name="name">Import Documents</field>
+        <field name="res_model">home_finance.statement.import</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <record id="hf_statement_import_view_form" model="ir.ui.view">
+        <field name="name">home_finance.statement.import.view.form</field>
+        <field name="model">home_finance.statement.import</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="period"/>
+                        <field name="wallet_id"/>
+                    </group>
+                    <group>
+                        <field name="file" filename="filename" widget="binary"/>
+                    </group>
+
+                    <group>
+                        <button name="action_parse" type="object" string="Parse File" class="btn-primary"/>
+                    </group>
+                    <notebook>
+                        <page string="Import Lines">
+                            <field name="line_ids" widget="one2many" mode="list"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="hf_statement_import_line_view_list" model="ir.ui.view">
+        <field name="name">home_finance.statement.import.line.view.list</field>
+        <field name="model">home_finance.statement.import.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="type"/>
+                <field name="wallet_id"/>
+                <field name="category_id"/>
+                <field name="project_id"/>
+                <field name="destination_wallet_id"/>
+                <field name="destination_amount"/>
+                <field name="destination_currency_id"/>
+                <field name="comment" optional="hide"/>
+            </list>
+        </field>
+    </record>
 </odoo>
