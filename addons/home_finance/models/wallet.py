@@ -12,6 +12,8 @@ class Wallet(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency', required=True,
                                   default=lambda self: self.env.company.currency_id)
     active = fields.Boolean(string='Active', default=True)
+    bank_id = fields.Many2one('home_finance.bank', string='Bank', ondelete='set null')
+    user_id = fields.Many2one('res.users', string='User',default=lambda self: self.env.user, ondelete='set null')
 
     transaction_ids = fields.One2many('home_finance.transaction', 'wallet_id', string='Transactions')
     transfer_source_ids = fields.One2many('home_finance.transfer', 'source_wallet_id', string='Transfers From This Wallet')

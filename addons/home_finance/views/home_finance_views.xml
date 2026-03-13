@@ -241,6 +241,8 @@
                         <field name="name"/>
                         <field name="type"/>
                         <field name="currency_id"/>
+                        <field name="bank_id"/>
+                        <field name="user_id"/>
                         <field name="active"/>
                     </group>
                 </sheet>
@@ -264,9 +266,9 @@
 
         <!-- Statement Import views    -->
     <record id="hf_statement_import_action" model="ir.actions.act_window">
-        <field name="name">Import Documents</field>
+        <field name="name">Import Bank Statement</field>
         <field name="res_model">home_finance.statement.import</field>
-        <field name="view_mode">form</field>
+        <field name="view_mode">form,list</field>
     </record>
 
     <record id="hf_statement_import_view_form" model="ir.ui.view">
@@ -295,6 +297,16 @@
             </form>
         </field>
     </record>
+    <record id="hf_statement_import_view_list" model="ir.ui.view">
+        <field name="name">home_finance.statement.import.view.list</field>
+        <field name="model">home_finance.statement.import</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="period"/>
+                <field name="wallet_id"/>
+            </list>
+        </field>
+    </record>
     <record id="hf_statement_import_line_view_list" model="ir.ui.view">
         <field name="name">home_finance.statement.import.line.view.list</field>
         <field name="model">home_finance.statement.import.line</field>
@@ -308,6 +320,64 @@
                 <field name="destination_amount"/>
                 <field name="destination_currency_id"/>
                 <field name="comment" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+      <!-- Statement Import Rule views    -->
+    <record id="hf_statement_import_rule_action" model="ir.actions.act_window">
+        <field name="name">Statement Import Rules</field>
+        <field name="res_model">home_finance.statement.import.rule</field>
+        <field name="view_mode">form,list</field>
+    </record>
+
+    <record id="hf_statement_import_rule_view_form" model="ir.ui.view">
+        <field name="name">home_finance.statement.import.rule.view.form</field>
+        <field name="model">home_finance.statement.import.rule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="General">
+                        <field name="wallet_id"/>
+                        <field name="file_type"/>
+                        <field name="active"/>
+                    </group>
+                    <group string="Statement Columns Mapping">
+                         <field name="statement_purpose_column"/>
+                        <field name="statement_commentary_column"/>
+                        <field name="statement_amount_column"/>
+                        <field name="statement_first_row"/>
+                    </group>
+                    <notebook>
+                        <page string="Import Rules">
+                            <field name="rule_line_ids" widget="one2many" mode="list"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="hf_statement_import_rule_view_list" model="ir.ui.view">
+        <field name="name">home_finance.statement.import.rule.view.list</field>
+        <field name="model">home_finance.statement.import.rule</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="file_type"/>
+                <field name="wallet_id"/>
+            </list>
+        </field>
+    </record>
+    <record id="hf_statement_import_rule_line_view_list" model="ir.ui.view">
+        <field name="name">home_finance.statement.import.rule.line.view.list</field>
+        <field name="model">home_finance.statement.import.rule.line</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="type"/>
+                <field name="wallet_id"/>
+                <field name="category_id"/>
+                <field name="purpose_key_word"/>
+                <field name="commentary_key_word"/>
+                <field name="sequence" widget="handle"/>
             </list>
         </field>
     </record>
