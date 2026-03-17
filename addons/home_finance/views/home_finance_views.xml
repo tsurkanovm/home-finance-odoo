@@ -49,7 +49,7 @@
         <field name="model">home_finance.transaction</field>
         <field name="arch" type="xml">
             <list decoration-danger="type == 'expense'"
-                  decoration-success="type == 'income'"  edit="1">
+                  decoration-success="type == 'income'" edit="1">
                 <field name="period"/>
                 <field name="type"/>
                 <field name="wallet_id"/>
@@ -264,7 +264,7 @@
         <field name="view_mode">list,form</field>
     </record>
 
-        <!-- Statement Import views    -->
+    <!-- Statement Import views    -->
     <record id="hf_statement_import_action" model="ir.actions.act_window">
         <field name="name">Import Bank Statement</field>
         <field name="res_model">home_finance.statement.import</field>
@@ -324,7 +324,7 @@
         </field>
     </record>
 
-      <!-- Statement Import Rule views    -->
+    <!-- Statement Import Rule views    -->
     <record id="hf_statement_import_rule_action" model="ir.actions.act_window">
         <field name="name">Statement Import Rules</field>
         <field name="res_model">home_finance.statement.import.rule</field>
@@ -343,7 +343,7 @@
                         <field name="active"/>
                     </group>
                     <group string="Statement Columns Mapping">
-                         <field name="statement_purpose_column"/>
+                        <field name="statement_purpose_column"/>
                         <field name="statement_commentary_column"/>
                         <field name="statement_amount_column"/>
                         <field name="statement_first_row"/>
@@ -371,14 +371,38 @@
         <field name="name">home_finance.statement.import.rule.line.view.list</field>
         <field name="model">home_finance.statement.import.rule.line</field>
         <field name="arch" type="xml">
-            <list editable="bottom">
+            <list>
                 <field name="type"/>
-                <field name="wallet_id"/>
-                <field name="category_id"/>
                 <field name="purpose_key_word"/>
                 <field name="commentary_key_word"/>
+                <field name="category_id" invisible="type=='transfer'"/>
+                <field name="wallet_id" invisible="type!='transfer'"/>
                 <field name="sequence" widget="handle"/>
             </list>
+        </field>
+    </record>
+    <record id="hf_statement_import_rule_line_view_form" model="ir.ui.view">
+        <field name="name">home_finance.statement.import.rule.line.view.form</field>
+        <field name="model">home_finance.statement.import.rule.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_save_and_duplicate"
+                            type="object"
+                            string="Save and Duplicate"
+                            class="btn-secondary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="rule_id" invisible="1"/>
+                        <field name="type"/>
+                        <field name="purpose_key_word"/>
+                        <field name="commentary_key_word"/>
+                        <field name="category_id" invisible="type=='transfer'"/>
+                        <field name="wallet_id" invisible="type!='transfer'"/>
+                    </group>
+                </sheet>
+            </form>
         </field>
     </record>
 </odoo>

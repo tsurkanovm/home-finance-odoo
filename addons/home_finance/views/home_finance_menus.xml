@@ -15,10 +15,7 @@
                       action="hf_statement_import_action"
                       sequence="30"
                       name="Import Bank Statement"/>
-            <menuitem id="hf_statement_import_rule_menu_action"
-                      action="hf_statement_import_rule_action"
-                      sequence="40"
-                      name="Statement Rules"/>
+
         </menuitem>
         <menuitem id="hf_setting_menu" name="Settings" sequence="20">
             <menuitem id="hf_wallet_model_menu_action"
@@ -33,6 +30,10 @@
                       action="hf_project_action"
                       sequence="30"
                       name="Transaction Project"/>
+             <menuitem id="hf_statement_import_rule_menu_action"
+                      action="hf_statement_import_rule_action"
+                      sequence="40"
+                      name="Statement Rules"/>
             <menuitem id="hf_currency_model_menu_action"
                       action="base.action_currency_form"
                       sequence="100"
