@@ -9,6 +9,9 @@ class StatementImport(models.Model):
 
     period = fields.Date(string='Period', required=True, default=fields.Date.context_today)
     wallet_id = fields.Many2one('home_finance.wallet', string='Wallet', required=True)
+    import_rule_id = fields.Many2one('home_finance.statement.import.rule',
+                                     string='Statement Import Rule', required=True,
+                                     domain="[('wallet_id', '=', wallet_id)]")
     file = fields.Binary(string='File', required=True)
     filename = fields.Char(string='Filename')
     line_ids = fields.One2many('home_finance.statement.import.line', 'statement_import_id', string='Statement Lines')

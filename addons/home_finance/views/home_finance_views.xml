@@ -268,7 +268,7 @@
     <record id="hf_statement_import_action" model="ir.actions.act_window">
         <field name="name">Import Bank Statement</field>
         <field name="res_model">home_finance.statement.import</field>
-        <field name="view_mode">form,list</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="hf_statement_import_view_form" model="ir.ui.view">
@@ -280,6 +280,7 @@
                     <group>
                         <field name="period"/>
                         <field name="wallet_id"/>
+                        <field name="import_rule_id"/>
                     </group>
                     <group>
                         <field name="file" filename="filename" widget="binary"/>
@@ -320,6 +321,8 @@
                 <field name="destination_amount"/>
                 <field name="destination_currency_id"/>
                 <field name="comment" optional="hide"/>
+                <field name="statement_purpose" optional="hide"/>
+                <field name="status" optional="hide"/>
             </list>
         </field>
     </record>
@@ -328,7 +331,7 @@
     <record id="hf_statement_import_rule_action" model="ir.actions.act_window">
         <field name="name">Statement Import Rules</field>
         <field name="res_model">home_finance.statement.import.rule</field>
-        <field name="view_mode">form,list</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="hf_statement_import_rule_view_form" model="ir.ui.view">
@@ -362,8 +365,8 @@
         <field name="model">home_finance.statement.import.rule</field>
         <field name="arch" type="xml">
             <list>
-                <field name="file_type"/>
                 <field name="wallet_id"/>
+                <field name="file_type"/>
             </list>
         </field>
     </record>
