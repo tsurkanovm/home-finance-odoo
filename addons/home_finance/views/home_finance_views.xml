@@ -288,6 +288,7 @@
 
                     <group>
                         <button name="action_parse" type="object" string="Parse File" class="btn-primary"/>
+                        <button name="action_convert" type="object" string="Convert Lines Into Documents" class="btn-primary"/>
                     </group>
                     <notebook>
                         <page string="Import Lines">
@@ -313,6 +314,7 @@
         <field name="model">home_finance.statement.import.line</field>
         <field name="arch" type="xml">
             <list editable="top" decoration-success="status == 'converted'" decoration-danger="status == 'error'">
+                <field name="display_line_no"/>
                  <button name="action_set_draft" type="object" icon="fa-check" title="Mark as Fixed"
                         invisible="status != 'error'"/>
                 <field name="type"/>

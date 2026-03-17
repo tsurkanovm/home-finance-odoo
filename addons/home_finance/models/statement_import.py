@@ -68,6 +68,7 @@ class StatementImport(models.Model):
             else:
                 record.name = "New Statement Import"
 
+    # ACTION METHODS
     def action_parse(self):
         self.ensure_one()
         _logger.info("Starting parsing for statement import %s", self.display_name)
@@ -81,6 +82,72 @@ class StatementImport(models.Model):
             raise ValidationError("Unsupported file type for now.")
 
         parser()
+
+    def action_convert(self):
+        self.ensure_one()
+        _logger.info("Starting conversion lines into documents")
+
+        transfer_data = self.prepare_transfer_data()
+        transaction_data = self.prepare_transaction_data()
+        self.create_transfer_documents(transfer_data)
+        self.create_transaction_documents(transaction_data)
+
+    def prepare_transfer_data(self) -> dict:
+        # merge all 'draft' lines with type ='transfer' into lines with common wallet, wallet destination - summing the amount and destination amount
+        transfer_lines = self.line_ids.filtered(lambda line: line.status == 'draft' and line.type == MOVEMENT_TYPE_TRANSFER)
+        transfer_data = {}
+        for line in transfer_lines:
+            line.action_validate()
+            line.status = 'converted'
+            wallet_id = line.wallet_id.id
+            wallet_destination_id = line.destination_wallet_id.id
+            key = (wallet_id, wallet_destination_id)
+            if key not in transfer_data:
+                transfer_data[key] = {}
+            transfer_data[key]['amount'] = transfer_data[key].get('amount', 0) + line.amount
+            transfer_data[key]['destination_amount'] \
+                = transfer_data[key].get('destination_amount', 0) + line.destination_amount
+
+        return transfer_data
+
+    def prepare_transaction_data(self) -> dict:
+        # merge all 'draft' lines with type != 'transfer' into lines with common type, wallet, category, project - summing the amount
+        transaction_lines = self.line_ids.filtered(lambda line: line.status == 'draft' and line.type != MOVEMENT_TYPE_TRANSFER)
+        transaction_data = {}
+        for line in transaction_lines:
+            line.action_validate()
+            line.status = 'converted'
+            key = (line.type, line.wallet_id.id, line.category_id.id, line.project_id.id)
+            if key not in transaction_data:
+                transaction_data[key] = {}
+            transaction_data[key]['amount'] = transaction_data[key].get('amount', 0) + line.amount
+
+        return transaction_data
+
+    def create_transfer_documents(self, transfer_data: dict):
+        for (wallet_id, wallet_destination_id), data in transfer_data.items():
+            self.env['home_finance.transfer'].create({
+                'source_wallet_id': wallet_id,
+                'destination_wallet_id': wallet_destination_id,
+                'source_amount': data['amount'],
+                'destination_amount': data['destination_amount'],
+                'period': self.period,
+            })
+            _logger.info("Created transfer transaction for wallet %s to wallet %s with amount %s",
+                         wallet_id, wallet_destination_id, data['amount'])
+
+    def create_transaction_documents(self, transaction_data: dict):
+        for (type, wallet_id, category_id, project_id), data in transaction_data.items():
+            self.env['home_finance.transaction'].create({
+                'type': type,
+                'wallet_id': wallet_id,
+                'category_id': category_id,
+                'project_id': project_id,
+                'amount': data['amount'],
+                'period': self.period,
+            })
+            _logger.info("Created transaction for wallet %s with type %s, category %s, project %s and amount %s",
+                         wallet_id, type, category_id, project_id, data['amount'])
 
     def _parse_xlsx(self):
         df = self._read_xlsx_dataframe()
@@ -123,7 +190,7 @@ class StatementImport(models.Model):
 
         return df.iloc[self.import_rule_id.statement_first_row:]
 
-    def _iter_statement_rows(self, df: pd.DataFrame) -> Iterator[Dict]:
+    def _iter_statement_rows(self, df: pd.DataFrame) -> Iterator[dict]:
         for _, row in df.iterrows():
             yield {
                 'purpose': row.iloc[0],
@@ -131,7 +198,7 @@ class StatementImport(models.Model):
                 'amount': row.iloc[2],
             }
 
-    def _get_matched_line(self, row_data: Dict) -> models.Model:
+    def _get_matched_line(self, row_data: dict) -> models.Model:
         purpose = row_data['purpose']
         description = row_data['description'] or ''
         description_condition = f'%{description.replace(chr(34), "")}%'
@@ -161,7 +228,7 @@ class StatementImport(models.Model):
 
         return rule_line_model.browse()
 
-    def _prepare_base_line_vals(self, row_data: Dict) -> Dict:
+    def _prepare_base_line_vals(self, row_data: dict) -> dict:
         return {
             'statement_import_id': self.id,
             'wallet_id': self.wallet_id.id,
@@ -170,7 +237,7 @@ class StatementImport(models.Model):
             'amount': row_data['amount'],
         }
 
-    def _create_transfer_line(self, match_line, row_data: Dict) -> Dict:
+    def _create_transfer_line(self, match_line, row_data: dict) -> dict:
         amount = row_data['amount']
         source_wallet_id = self.wallet_id.id if amount < 0 else match_line.wallet_id.id
 
@@ -186,7 +253,7 @@ class StatementImport(models.Model):
 
         return vals
 
-    def _create_income_line(self, match_line, row_data: Dict) -> Dict:
+    def _create_income_line(self, match_line, row_data: dict) -> dict:
         amount = row_data['amount']
 
         vals = self._prepare_base_line_vals(row_data)
@@ -199,7 +266,7 @@ class StatementImport(models.Model):
 
         return vals
 
-    def _create_expense_line(self, match_line, row_data: Dict) -> Dict:
+    def _create_expense_line(self, match_line, row_data: dict) -> dict:
         amount = row_data['amount']
 
         vals = self._prepare_base_line_vals(row_data)
@@ -212,7 +279,7 @@ class StatementImport(models.Model):
 
         return vals
 
-    def _prepare_error_line_vals(self, row_data: Dict) -> Dict:
+    def _prepare_error_line_vals(self, row_data: dict) -> dict:
         vals = self._prepare_base_line_vals(row_data)
         vals.update({
             'status': 'error',
