@@ -7,7 +7,8 @@ class StatementImportRule(models.Model):
     active = fields.Boolean(string='Active', default=True)
     wallet_id = fields.Many2one('home_finance.wallet', string='Wallet', required=True)
     file_type = fields.Selection(string='File Type',
-                                 selection=[('csv', 'CSV'), ('xlsx', 'Excel')], required=True, default='xlsx')
+                                 selection=[('csv', 'CSV'), ('xlsx', 'Excel XLSX'), ('xls', 'Excel')],
+                                 required=True, default='xlsx')
     statement_purpose_column = fields.Selection(
         [('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'), ('E', 'E'), ('F', 'F'), ('G', 'G'), ('H', 'H'), ('I', 'I'), ('J', 'J')],
         string='Statement Purpose Column', required=True, default='B')

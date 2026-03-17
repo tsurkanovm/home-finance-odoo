@@ -24,3 +24,8 @@ class StatementImportLine(models.Model):
                               selection=[('draft', 'Draft'), ('converted', 'Converted'), ('error', 'Error')],
                               default='draft')
     statement_import_id = fields.Many2one('home_finance.statement.import', string='Statement Import', ondelete='cascade')
+
+
+    def action_set_draft(self):
+        self.status = 'draft'
+        self.amount = abs(self.amount)
