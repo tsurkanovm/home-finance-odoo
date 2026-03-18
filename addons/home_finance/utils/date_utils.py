@@ -38,3 +38,9 @@ def get_end_of_previous_month(value=None):
 
     first_day_this_month = value.replace(day=1)
     return first_day_this_month - relativedelta(days=1)
+
+def get_current_period(self):
+    value = self.env['ir.config_parameter'].sudo().get_param(
+        'home_finance.current_period'
+    )
+    return fields.Date.to_date(value) if value else False

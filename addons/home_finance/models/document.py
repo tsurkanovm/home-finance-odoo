@@ -1,5 +1,6 @@
 from odoo import models, fields, api
-from ..utils.date_utils import get_month_end_date, get_end_of_previous_month
+from odoo.exceptions import ValidationError
+from ..utils.date_utils import get_month_end_date, get_end_of_previous_month, get_current_period
 
 class Document(models.AbstractModel):
     _name = 'home_finance.document'
@@ -12,6 +13,17 @@ class Document(models.AbstractModel):
         required=True,
     )
     comment = fields.Text(string='Commentary')
+
+    @api.constrains('period')
+    def _check_period(self):
+        current_period = get_current_period(self)
+        # @todo allow to edit commentary for old records
+        for record in self:
+            if record.active and record.period and record.period < current_period:
+                raise ValidationError(
+                    "The period of an active document cannot be before the current period. "
+                    "Please update the current period in settings or set the document as inactive."
+                )
 
     @api.model_create_multi
     def create(self, vals):

@@ -15,6 +15,7 @@ class ResConfigSettings(models.TransientModel):
     # field shown in Settings form
     home_finance_current_period = fields.Date(
         string="Current Period",
+        default=date.today(),
     )
 
     @api.model
