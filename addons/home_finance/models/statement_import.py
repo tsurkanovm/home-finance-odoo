@@ -8,6 +8,7 @@ from collections import defaultdict
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
+
 from ..constant import (
     MOVEMENT_TYPE_EXPENSE,
     MOVEMENT_TYPE_INCOME,
@@ -96,6 +97,19 @@ class StatementImport(models.Model):
 
         lines_to_convert = self.line_ids.filtered(lambda line: line.status == 'draft' and line.type)
         lines_to_convert.write({'status': 'converted'})
+
+    # CRON ACTION METHODS
+    def cron_cleanup_expired_imports(self, delete=True):
+        import_ttl = self.env['ir.config_parameter'].sudo().get_param('home_finance.statement_import_ttl', default=2)
+        if not import_ttl:
+            return
+        cutoff_date = fields.Date.add(fields.Date.context_today(self), months=-int(import_ttl))
+        expired_imports = self.search([('period', '<', cutoff_date)])
+        if delete:
+            expired_imports.unlink()
+            _logger.info("Deleted %s expired statement imports with period before %s", len(expired_imports), cutoff_date)
+        else:
+            _logger.info("Found %s expired statement imports with period before %s", len(expired_imports), cutoff_date)
 
     def _prepare_transfer_data(self) -> dict:
         transfer_lines = self.line_ids.filtered(
