@@ -2,7 +2,8 @@ import base64
 import io
 import logging
 import pandas as pd
-from typing import Dict, Iterator
+from typing import Iterator
+from collections import defaultdict
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
@@ -85,69 +86,95 @@ class StatementImport(models.Model):
 
     def action_convert(self):
         self.ensure_one()
-        _logger.info("Starting conversion lines into documents")
+        _logger.info("Starting conversion of import lines into documents for import %s", self.id)
 
-        transfer_data = self.prepare_transfer_data()
-        transaction_data = self.prepare_transaction_data()
-        self.create_transfer_documents(transfer_data)
-        self.create_transaction_documents(transaction_data)
+        transfer_data = self._prepare_transfer_data()
+        transaction_data = self._prepare_transaction_data()
 
-    def prepare_transfer_data(self) -> dict:
-        # merge all 'draft' lines with type ='transfer' into lines with common wallet, wallet destination - summing the amount and destination amount
-        transfer_lines = self.line_ids.filtered(lambda line: line.status == 'draft' and line.type == MOVEMENT_TYPE_TRANSFER)
-        transfer_data = {}
+        self._create_transfer_documents(transfer_data)
+        self._create_transaction_documents(transaction_data)
+
+        lines_to_convert = self.line_ids.filtered(lambda line: line.status == 'draft' and line.type)
+        lines_to_convert.write({'status': 'converted'})
+
+    def _prepare_transfer_data(self) -> dict:
+        transfer_lines = self.line_ids.filtered(
+            lambda line: line.status == 'draft' and line.type == MOVEMENT_TYPE_TRANSFER
+        )
+
+        transfer_data = defaultdict(lambda: {
+            'amount': 0.0,
+            'destination_amount': 0.0,
+        })
+
         for line in transfer_lines:
             line.action_validate()
-            line.status = 'converted'
-            wallet_id = line.wallet_id.id
-            wallet_destination_id = line.destination_wallet_id.id
-            key = (wallet_id, wallet_destination_id)
-            if key not in transfer_data:
-                transfer_data[key] = {}
-            transfer_data[key]['amount'] = transfer_data[key].get('amount', 0) + line.amount
-            transfer_data[key]['destination_amount'] \
-                = transfer_data[key].get('destination_amount', 0) + line.destination_amount
+            key = (line.wallet_id.id, line.destination_wallet_id.id)
+            transfer_data[key]['amount'] += line.amount
+            transfer_data[key]['destination_amount'] += line.destination_amount
 
-        return transfer_data
+        return dict(transfer_data)
 
-    def prepare_transaction_data(self) -> dict:
-        # merge all 'draft' lines with type != 'transfer' into lines with common type, wallet, category, project - summing the amount
-        transaction_lines = self.line_ids.filtered(lambda line: line.status == 'draft' and line.type != MOVEMENT_TYPE_TRANSFER)
-        transaction_data = {}
+    def _prepare_transaction_data(self) -> dict:
+        transaction_lines = self.line_ids.filtered(
+            lambda line: line.status == 'draft' and line.type != MOVEMENT_TYPE_TRANSFER
+        )
+
+        transaction_data = defaultdict(lambda: {
+            'amount': 0.0,
+        })
+
         for line in transaction_lines:
             line.action_validate()
-            line.status = 'converted'
-            key = (line.type, line.wallet_id.id, line.category_id.id, line.project_id.id)
-            if key not in transaction_data:
-                transaction_data[key] = {}
-            transaction_data[key]['amount'] = transaction_data[key].get('amount', 0) + line.amount
+            key = (
+                line.type,
+                line.wallet_id.id,
+                line.category_id.id,
+                line.project_id.id,
+            )
+            transaction_data[key]['amount'] += line.amount
 
-        return transaction_data
+        return dict(transaction_data)
 
-    def create_transfer_documents(self, transfer_data: dict):
-        for (wallet_id, wallet_destination_id), data in transfer_data.items():
-            self.env['home_finance.transfer'].create({
+    def _create_transfer_documents(self, transfer_data: dict):
+        transfer_model = self.env['home_finance.transfer']
+
+        for (wallet_id, destination_wallet_id), data in transfer_data.items():
+            transfer_model.create({
                 'source_wallet_id': wallet_id,
-                'destination_wallet_id': wallet_destination_id,
+                'destination_wallet_id': destination_wallet_id,
                 'source_amount': data['amount'],
                 'destination_amount': data['destination_amount'],
                 'period': self.period,
             })
-            _logger.info("Created transfer transaction for wallet %s to wallet %s with amount %s",
-                         wallet_id, wallet_destination_id, data['amount'])
+            _logger.info(
+                "Created transfer: source_wallet_id=%s, destination_wallet_id=%s, amount=%s, destination_amount=%s",
+                wallet_id,
+                destination_wallet_id,
+                data['amount'],
+                data['destination_amount'],
+            )
 
-    def create_transaction_documents(self, transaction_data: dict):
-        for (type, wallet_id, category_id, project_id), data in transaction_data.items():
-            self.env['home_finance.transaction'].create({
-                'type': type,
+    def _create_transaction_documents(self, transaction_data: dict):
+        transaction_model = self.env['home_finance.transaction']
+
+        for (movement_type, wallet_id, category_id, project_id), data in transaction_data.items():
+            transaction_model.create({
+                'type': movement_type,
                 'wallet_id': wallet_id,
                 'category_id': category_id,
                 'project_id': project_id,
                 'amount': data['amount'],
                 'period': self.period,
             })
-            _logger.info("Created transaction for wallet %s with type %s, category %s, project %s and amount %s",
-                         wallet_id, type, category_id, project_id, data['amount'])
+            _logger.info(
+                "Created transaction: type=%s, wallet_id=%s, category_id=%s, project_id=%s, amount=%s",
+                movement_type,
+                wallet_id,
+                category_id,
+                project_id,
+                data['amount'],
+            )
 
     def _parse_xlsx(self):
         df = self._read_xlsx_dataframe()
