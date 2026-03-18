@@ -7,7 +7,7 @@
         and uploads from your bank statements.
     """,
     'application': True,
-    'depends': ['base'],
+    'depends': ['base', 'base_setup'],
     'data': [
         'data/ir.model.access.csv',
         'views/home_finance_views.xml',
