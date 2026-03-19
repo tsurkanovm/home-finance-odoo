@@ -1,5 +1,6 @@
 from odoo import models, fields, api, _
 from ..constant import MOVEMENT_TYPE_SELECTION, MOVEMENT_TYPE_EXPENSE
+from ..utils.currency_utils import compute_base_amount
 
 
 class Transaction(models.Model):
@@ -39,12 +40,4 @@ class Transaction(models.Model):
     @api.depends('amount', 'currency_id', 'base_currency_id', 'period')
     def _compute_base_amount(self):
         for transaction in self:
-            if transaction.amount and transaction.currency_id and transaction.base_currency_id:
-                transaction.base_amount = self.env['res.currency'].browse(transaction.currency_id.id)._convert(
-                    transaction.amount,
-                    transaction.base_currency_id,
-                    self.env.company,
-                    transaction.period
-                )
-            else:
-                transaction.base_amount = 0.0
+            transaction.base_amount = compute_base_amount(transaction, self)

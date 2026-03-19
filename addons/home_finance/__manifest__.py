@@ -11,9 +11,10 @@
     'data': [
         'data/ir.model.access.csv',
         'data/ir.cron_data.xml',
+        'views/res_config_settings_views.xml',
+        'views/wallet_balance_recalculate_wizard_views.xml',
         'views/home_finance_views.xml',
         'views/home_finance_menus.xml',
-        'views/res_config_settings_views.xml',
     ],
     "demo": [
     ],

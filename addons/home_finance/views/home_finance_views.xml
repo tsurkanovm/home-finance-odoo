@@ -288,7 +288,8 @@
 
                     <group>
                         <button name="action_parse" type="object" string="Parse File" class="btn-primary"/>
-                        <button name="action_convert" type="object" string="Convert Lines Into Documents" class="btn-primary"/>
+                        <button name="action_convert" type="object" string="Convert Lines Into Documents"
+                                class="btn-primary"/>
                     </group>
                     <notebook>
                         <page string="Import Lines">
@@ -315,7 +316,7 @@
         <field name="arch" type="xml">
             <list editable="top" decoration-success="status == 'converted'" decoration-danger="status == 'error'">
                 <field name="display_line_no"/>
-                 <button name="action_set_draft" type="object" icon="fa-check" title="Mark as Fixed"
+                <button name="action_set_draft" type="object" icon="fa-check" title="Mark as Fixed"
                         invisible="status != 'error'"/>
                 <field name="type"/>
                 <field name="wallet_id"/>
@@ -411,6 +412,37 @@
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <!-- Balance views    -->
+    <record id="hf_wallet_balance_action" model="ir.actions.act_window">
+        <field name="name">Balance</field>
+        <field name="res_model">home_finance.wallet.balance</field>
+        <field name="view_mode">list,pivot</field>
+    </record>
+    <record id="hf_wallet_balance_view_list" model="ir.ui.view">
+        <field name="name">home_finance.wallet.balance.view.list</field>
+        <field name="model">home_finance.wallet.balance</field>
+        <field name="arch" type="xml">
+            <list edit="0" create="0" delete="0" decoration-danger="amount &lt; 0">
+                <field name="period"/>
+                <field name="wallet_id"/>
+                <field name="currency_id"/>
+                <field name="amount"/>
+            </list>
+        </field>
+    </record>
+    <record id="hf_wallet_balance_view_pivot" model="ir.ui.view">
+        <field name="name">home_finance.wallet.balance.view.pivot</field>
+        <field name="model">home_finance.wallet.balance</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="currency_id" type="column"/>
+                <field name="wallet_id" type="row"/>
+                <field name="amount" type="measure"/>
+                <field name="base_amount" type="measure"/>
+            </pivot>
         </field>
     </record>
 </odoo>

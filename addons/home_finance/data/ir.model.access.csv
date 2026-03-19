@@ -10,3 +10,5 @@ home_finance.access_statement.import.line,access_statement.import.line,home_fina
 home_finance.access_bank,access_bank,home_finance.model_home_finance_bank,base.group_user,1,1,1,1
 home_finance.access_statement.import.rule,access_statement.import.rule,home_finance.model_home_finance_statement_import_rule,base.group_user,1,1,1,1
 home_finance.access_statement.import.rule.line,access_statement.import.rule.line,home_finance.model_home_finance_statement_import_rule_line,base.group_user,1,1,1,1
+home_finance.access_wallet.balance,access_wallet.balance,home_finance.model_home_finance_wallet_balance,base.group_user,1,1,1,1
+home_finance.access_wallet.balance.recalculate.wizard,access_wallet.balance.recalculate.wizard,home_finance.model_home_finance_wallet_balance_recalculate_wizard,base.group_user,1,1,1,1

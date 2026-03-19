@@ -61,7 +61,7 @@ class Wallet(models.Model):
 
     # CRUD METHODS
     def write(self, vals):
-        if 'currency_id' in vals or 'type' in vals:
+        if 'currency_id' in vals or 'type' in vals or ('active' in vals and vals['active'] == False):
             for wallet in self:
                 self.check_on_existing_transactions(wallet)
                 self.check_on_existing_transfer(wallet)
@@ -71,7 +71,7 @@ class Wallet(models.Model):
     def check_on_existing_transactions(self, wallet):
         if self.env['home_finance.transaction'].search([('wallet_id', '=', wallet.id)], limit=1):
             raise ValidationError(
-                "You cannot change the currency or type of a wallet that has existing transactions."
+                "You cannot change a wallet that has existing transactions."
             )
 
     def check_on_existing_transfer(self, wallet):
@@ -79,4 +79,4 @@ class Wallet(models.Model):
             ['|', ('source_wallet_id', '=', wallet.id), ('destination_wallet_id', '=', wallet.id)], limit=1)
         if existing_transfers:
             raise ValidationError(
-                "You cannot change the currency or type of a wallet that has existing transfers.")
+                "You cannot change a wallet that has existing transfers.")

@@ -10,3 +10,4 @@ from . import statement_import_line
 from . import statement_import_rule
 from . import statement_import_rule_line
 from . import res_config_settings
+from . import wallet_balance

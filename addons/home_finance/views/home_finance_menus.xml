@@ -2,7 +2,7 @@
 <odoo>
     <menuitem id="hf_menu_root" name="Home Finance" sequence="10">
         <menuitem id="hf_doc_menu" name="Documents" sequence="10">
-             <menuitem id="hf_transaction_model_menu_action"
+            <menuitem id="hf_transaction_model_menu_action"
                       action="hf_transaction_action"
                       sequence="10"
                       name="Transaction"/>
@@ -15,6 +15,11 @@
                       action="hf_statement_import_action"
                       sequence="30"
                       name="Import Bank Statement"/>
+
+            <menuitem id="hf_wallet_balance_recalculate_menu"
+                      action="hf_wallet_balance_recalculate_wizard_action"
+                      sequence="40"
+                      name="Recalculate Balance"/>
 
         </menuitem>
         <menuitem id="hf_setting_menu" name="Settings" sequence="20">
@@ -30,7 +35,7 @@
                       action="hf_project_action"
                       sequence="30"
                       name="Transaction Project"/>
-             <menuitem id="hf_statement_import_rule_menu_action"
+            <menuitem id="hf_statement_import_rule_menu_action"
                       action="hf_statement_import_rule_action"
                       sequence="40"
                       name="Statement Rules"/>
@@ -38,6 +43,13 @@
                       action="base.action_currency_form"
                       sequence="100"
                       name="Currency"/>
+        </menuitem>
+
+        <menuitem id="hf_report_menu" name="Reports" sequence="30">
+            <menuitem id="hf_wallet_balance_menu_action"
+                      action="hf_wallet_balance_action"
+                      sequence="10"
+                      name="Balance"/>
         </menuitem>
     </menuitem>
 </odoo>
