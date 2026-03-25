@@ -5,7 +5,7 @@ from odoo.exceptions import ValidationError
 class Transfer(models.Model):
     _name = 'home_finance.transfer'
     _description = 'Transfer between wallets'
-    _inherit = 'home_finance.document'
+    _inherit = ['home_finance.document']
 
     source_wallet_id = fields.Many2one('home_finance.wallet', string='From Wallet', required=True, ondelete='restrict')
     destination_wallet_id = fields.Many2one('home_finance.wallet', string='To Wallet', required=True, ondelete='restrict')

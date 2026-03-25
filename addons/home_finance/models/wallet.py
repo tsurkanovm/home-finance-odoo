@@ -34,14 +34,16 @@ class Wallet(models.Model):
     def _compute_expense_amount(self):
         for wallet in self:
             wallet.expense_amount = sum(
-                transaction.amount for transaction in wallet.transaction_ids if transaction.type == 'expense'
+                transaction.amount for transaction in wallet.transaction_ids
+                if transaction.type == 'expense' and transaction.is_current_period
             )
 
     @api.depends('transaction_ids')
     def _compute_income_amount(self):
         for wallet in self:
             wallet.income_amount = sum(
-                transaction.amount for transaction in wallet.transaction_ids if transaction.type == 'income'
+                transaction.amount for transaction in wallet.transaction_ids
+                if transaction.type == 'income' and transaction.is_current_period
             )
 
     @api.depends('transfer_source_ids')
@@ -49,6 +51,7 @@ class Wallet(models.Model):
         for wallet in self:
             wallet.transfer_out_amount = sum(
                 transfer.source_amount for transfer in wallet.transfer_source_ids
+                if transfer.is_current_period
             )
 
     @api.depends('transfer_destination_ids')
@@ -56,6 +59,7 @@ class Wallet(models.Model):
         for wallet in self:
             wallet.transfer_in_amount = sum(
                 transfer.destination_amount for transfer in wallet.transfer_destination_ids
+                if transfer.is_current_period
             )
 
 

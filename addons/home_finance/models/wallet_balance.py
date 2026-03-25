@@ -48,13 +48,11 @@ class WalletBalance(models.Model):
         readonly=True,
     )
 
-    _sql_constraints = [
-        (
-            'wallet_balance_wallet_unique',
+    _check_wallet_uniqueness = models.Constraint(
             'unique(wallet_id)',
             'Balance for this wallet already exists.'
         )
-    ]
+
 
     @api.depends('amount', 'currency_id', 'base_currency_id', 'period')
     def _compute_base_amount(self):

@@ -5,7 +5,7 @@ from ..utils.currency_utils import compute_base_amount
 
 class Transaction(models.Model):
     _name='home_finance.transaction'
-    _inherit = 'home_finance.document'
+    _inherit = ['home_finance.document']
     _description='Home Finance Transaction'
 
     # @todo - replace by related field to category type, and two form views (one for expense, one for income)
