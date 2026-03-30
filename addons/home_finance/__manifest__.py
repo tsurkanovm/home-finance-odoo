@@ -1,6 +1,6 @@
 {
     'name': 'Home Finance',
-    'version': '1.0',
+    'version': '19.0.1.0.0',
     'category': 'Accounting',
     'description': """
         The Home Fiance module. Provides a simple way to manage your home finances, including tracking expenses, incomes, 
