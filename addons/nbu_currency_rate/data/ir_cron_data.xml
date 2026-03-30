@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="ir_cron_currency_rate_update_nbu" model="ir.cron">
+        <field name="name">Currency: NBU rate update (Ukraine)</field>
+        <field name="model_id" ref="base.model_res_company"/>
+        <field name="state">code</field>
+        <field name="code">model.update_currency_rates()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="nextcall"
+               eval="(datetime.now() + relativedelta(day=31, hour=3, minute=0, second=0)).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="active">True</field>
+    </record>
+</odoo>

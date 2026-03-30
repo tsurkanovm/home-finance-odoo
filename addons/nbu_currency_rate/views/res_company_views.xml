@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form" model="ir.ui.view">
+        <field name="name">res.company.form.inherit.account</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="currency_provider"/>
+                <button name="%(nbu_currency_rate_updater_wizard_action)d"
+                        type="action"
+                        invisible="currency_provider != 'nbu'"
+                        string="Update Currency Rates"
+                        icon="fa-dollar-sign"
+                        help="Update Currency Rates Wizard Form">
+                </button>
+                  <newline/>
+
+            <div colspan="2"
+                 invisible="currency_provider != 'nbu'"
+                 class="text-muted mt-2">
+                <strong>National Bank of Ukraine (NBU)</strong><br/>
+                Uses the free, public NBU REST API — no API key required.<br/>
+                Rates are published daily around 15:30 Kyiv time (EET/EEST).<br/>
+                Base currency: UAH (Ukrainian Hryvnia).<br/>
+                <a href="https://bank.gov.ua/en/markets/exchangerates"
+                   target="_blank">
+                    Official NBU exchange rates page →
+                </a>
+            </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

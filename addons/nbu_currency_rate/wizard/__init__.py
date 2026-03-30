@@ -1,0 +1,1 @@
+from . import nbu_currency_rate_updater

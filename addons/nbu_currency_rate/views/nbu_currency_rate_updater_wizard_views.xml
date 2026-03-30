@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="nbu_currency_rate_updater_wizard_action" model="ir.actions.act_window">
+        <field name="name">Update Currency Rate by NBU</field>
+        <field name="res_model">nbu_currency_rate.updater</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <!-- Wizard form view -->
+    <record id="nbu_currency_rate_updater_wizard_view_form" model="ir.ui.view">
+        <field name="name">nbu_currency_rate.updater.wizard.form</field>
+        <field name="model">nbu_currency_rate.updater</field>
+        <field name="arch" type="xml">
+            <form string="Update Currency Rate by NBU">
+                <group>
+                    <field name="currency_id"/>
+                </group>
+                <group>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="interval" invisible="date_from == date_to"/>
+                </group>
+                <footer>
+                    <button name="action_update_rates"
+                            type="object"
+                            string="Update"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            special="cancel"
+                            class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
