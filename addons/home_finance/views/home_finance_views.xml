@@ -77,7 +77,7 @@
         <field name="name">home_finance.transaction.view.graph</field>
         <field name="model">home_finance.transaction</field>
         <field name="arch" type="xml">
-            <graph string="Category Analysis" type="chart">
+            <graph string="Category Analysis" type="pie">
                 <field name="period" interval="month"/>
                 <field name="amount" type="measure"/>
                 <field name="category_id"/>
