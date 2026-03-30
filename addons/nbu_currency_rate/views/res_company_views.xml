@@ -7,15 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='currency_id']" position="after">
                 <field name="currency_provider"/>
-                <button name="%(nbu_currency_rate_updater_wizard_action)d"
-                        type="action"
-                        invisible="currency_provider != 'nbu'"
-                        string="Update Currency Rates"
-                        icon="fa-dollar-sign"
-                        help="Update Currency Rates Wizard Form">
-                </button>
-                  <newline/>
-
+                <newline/>
             <div colspan="2"
                  invisible="currency_provider != 'nbu'"
                  class="text-muted mt-2">

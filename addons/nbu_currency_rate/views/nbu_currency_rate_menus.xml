@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="nbu_currency_rate_updater_menu"
+              parent="home_finance.hf_setting_menu"
+              action="nbu_currency_rate_updater_wizard_action"
+              sequence="110"
+              name="Currency Rate Import"/>
+</odoo>

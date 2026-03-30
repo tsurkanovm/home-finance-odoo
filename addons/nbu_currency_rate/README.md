@@ -108,19 +108,6 @@ currency_rate_update_ua/
 │   └── res_company_views.xml       # Added provider selector in company form
 ├── data/
 │   └── ir_cron_data.xml            # Optional dedicated cron
-├── test_nbu_api.py                 # Standalone script to test the API
 └── README.md
 ```
 
-## Testing without Odoo
-
-```bash
-cd currency_rate_update_ua
-pip install requests
-python3 test_nbu_api.py             # latest rates
-python3 test_nbu_api.py 2026-03-20  # historical rates
-```
-
-## License
-
-LGPL-3
