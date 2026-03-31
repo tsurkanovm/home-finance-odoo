@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="magento_integrator_runner_wizard_action" model="ir.actions.act_window">
+        <field name="name">Run Magento Data Import</field>
+        <field name="res_model">magento_integrator.runner.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <!-- Wizard form view -->
+    <record id="magento_integrator_runner_wizard_view_form" model="ir.ui.view">
+        <field name="name">magento_integrator.runner.wizard.form</field>
+        <field name="model">magento_integrator.runner.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Run Magento Data Import">
+                <group>
+                    <field name="data_type"/>
+                </group>
+                <footer>
+                    <button name="action_run"
+                            type="object"
+                            string="Run"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            special="cancel"
+                            class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
