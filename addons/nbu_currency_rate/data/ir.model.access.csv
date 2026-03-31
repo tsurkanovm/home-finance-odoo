@@ -1,3 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 nbu_currency_rate.access_updater,access_updater,nbu_currency_rate.model_nbu_currency_rate_updater,base.group_user,1,1,1,1
-nbu_currency_rate.access_provider,access_provider,nbu_currency_rate.model_nbu_currency_rate_provider,base.group_user,1,1,1,1
