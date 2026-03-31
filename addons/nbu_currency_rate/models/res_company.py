@@ -18,7 +18,7 @@ class ResCompany(models.Model):
         parent = getattr(super(), "_get_currency_provider_selection", None)
         if parent:
             selection = parent()
-        return selection + [("nbu", "National Bank of Ukraine (NBU)")]
+        return selection + [("nbu", _("National Bank of Ukraine (NBU)"))]
 
     def _get_provider_adapter(self):
         self.ensure_one()

@@ -1,0 +1,220 @@
+# Ukrainian translation for nbu_currency_rate module
+# Copyright (C) 2026 Mykhailo Tsurkanov
+# This file is distributed under the same license as the nbu_currency_rate module.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-30 00:00+0000\n"
+"PO-Revision-Date: 2026-03-30 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+# ---------------------------------------------------------------------------
+# Module metadata
+# ---------------------------------------------------------------------------
+
+#. module: nbu_currency_rate
+#: model:ir.module.module,shortdesc:base.module_nbu_currency_rate
+msgid "Currency Rate Update — NBU (Ukraine)"
+msgstr "Оновлення курсу валют — НБУ (Україна)"
+
+#. module: nbu_currency_rate
+#: model:ir.module.module,summary:base.module_nbu_currency_rate
+msgid ""
+"Import currency rates from the National Bank of Ukraine (NBU) — free API, "
+"no key required"
+msgstr ""
+"Імпорт курсів валют від Національного банку України (НБУ) — безкоштовний "
+"API, ключ не потрібен"
+
+# ---------------------------------------------------------------------------
+# Model names (_description)
+# ---------------------------------------------------------------------------
+
+#. module: nbu_currency_rate
+#: model:ir.model,name:nbu_currency_rate.model_nbu_currency_rate_provider
+msgid "NBU Currency Rate Provider"
+msgstr "Постачальник курсів валют НБУ"
+
+#. module: nbu_currency_rate
+#: model:ir.model,name:nbu_currency_rate.model_nbu_currency_rate_updater
+msgid "NBU Currency Rate Updater"
+msgstr "Оновлювач курсів валют НБУ"
+
+# ---------------------------------------------------------------------------
+# Field strings — res.company extension
+# ---------------------------------------------------------------------------
+
+#. module: nbu_currency_rate
+#: model:ir.model.fields,field_description:nbu_currency_rate.field_res_company__currency_provider
+msgid "Currency Provider"
+msgstr "Постачальник курсів валют"
+
+# ---------------------------------------------------------------------------
+# Selection values
+# ---------------------------------------------------------------------------
+
+#. module: nbu_currency_rate
+#: model:ir.model.fields.selection,name:nbu_currency_rate.selection__res_company__currency_provider__nbu
+msgid "National Bank of Ukraine (NBU)"
+msgstr "Національний банк України (НБУ)"
+
+# ---------------------------------------------------------------------------
+# Field strings — updater wizard
+# ---------------------------------------------------------------------------
+
+#. module: nbu_currency_rate
+#: model:ir.model.fields,field_description:nbu_currency_rate.field_nbu_currency_rate_updater__company_id
+msgid "Company"
+msgstr "Компанія"
+
+#. module: nbu_currency_rate
+#: model:ir.model.fields,field_description:nbu_currency_rate.field_nbu_currency_rate_updater__currency_id
+msgid "Currency"
+msgstr "Валюта"
+
+#. module: nbu_currency_rate
+#: model:ir.model.fields,field_description:nbu_currency_rate.field_nbu_currency_rate_updater__date_from
+msgid "From Date"
+msgstr "Від дати"
+
+#. module: nbu_currency_rate
+#: model:ir.model.fields,field_description:nbu_currency_rate.field_nbu_currency_rate_updater__date_to
+msgid "To Date"
+msgstr "До дати"
+
+#. module: nbu_currency_rate
+#: model:ir.model.fields,field_description:nbu_currency_rate.field_nbu_currency_rate_updater__interval
+msgid "Interval"
+msgstr "Інтервал"
+
+#. module: nbu_currency_rate
+#: model:ir.model.fields.selection,name:nbu_currency_rate.selection__nbu_currency_rate_updater__interval__daily
+msgid "Daily"
+msgstr "Щоденно"
+
+#. module: nbu_currency_rate
+#: model:ir.model.fields.selection,name:nbu_currency_rate.selection__nbu_currency_rate_updater__interval__weekly
+msgid "Weekly"
+msgstr "Щотижнево"
+
+#. module: nbu_currency_rate
+#: model:ir.model.fields.selection,name:nbu_currency_rate.selection__nbu_currency_rate_updater__interval__monthly
+msgid "Monthly"
+msgstr "Щомісячно"
+
+# ---------------------------------------------------------------------------
+# Code strings (Python _() calls)
+# ---------------------------------------------------------------------------
+
+#. module: nbu_currency_rate
+#: code:addons/nbu_currency_rate/wizard/nbu_currency_rate_updater.py:0
+msgid "Please set both From Date and To Date."
+msgstr "Будь ласка, встановіть дату початку та дату кінця."
+
+#. module: nbu_currency_rate
+#: code:addons/nbu_currency_rate/wizard/nbu_currency_rate_updater.py:0
+msgid "From Date must be before or equal to To Date."
+msgstr "Дата початку повинна бути раніше або рівна даті кінця."
+
+#. module: nbu_currency_rate
+#: code:addons/nbu_currency_rate/models/nbu_currency_rate_provider.py:0
+#, python-format
+msgid "Could not fetch rate for company currency %s from NBU."
+msgstr "Не вдалося отримати курс для валюти компанії %s від НБУ."
+
+#. module: nbu_currency_rate
+#: code:addons/nbu_currency_rate/models/nbu_currency_rate_provider.py:0
+msgid "NBU returned no usable currency rates."
+msgstr "НБУ не повернув жодних використовуваних курсів валют."
+
+#. module: nbu_currency_rate
+#: code:addons/nbu_currency_rate/models/nbu_currency_rate_provider.py:0
+#, python-format
+msgid "Failed to fetch currency rates from NBU: %s"
+msgstr "Не вдалося отримати курси валют від НБУ: %s"
+
+#. module: nbu_currency_rate
+#: code:addons/nbu_currency_rate/models/res_company.py:0
+#, python-format
+msgid "No custom currency provider adapter configured for company %s."
+msgstr "Не налаштований адаптер постачальника валюти для компанії %s."
+
+# ---------------------------------------------------------------------------
+# Action names
+# ---------------------------------------------------------------------------
+
+#. module: nbu_currency_rate
+#: model:ir.actions.act_window,name:nbu_currency_rate.nbu_currency_rate_updater_wizard_action
+msgid "Update Currency Rate by NBU"
+msgstr "Оновлення курсу валют від НБУ"
+
+# ---------------------------------------------------------------------------
+# Menu names
+# ---------------------------------------------------------------------------
+
+#. module: nbu_currency_rate
+#: model:ir.ui.menu,name:nbu_currency_rate.nbu_currency_rate_updater_menu
+msgid "Currency Rate Import"
+msgstr "Імпорт курсу валют"
+
+# ---------------------------------------------------------------------------
+# View XML strings — buttons, form title, info text
+# ---------------------------------------------------------------------------
+
+#. module: nbu_currency_rate
+#: model_terms:ir.ui.view,arch_db:nbu_currency_rate.nbu_currency_rate_updater_wizard_view_form
+msgid "Update Currency Rate by NBU"
+msgstr "Оновлення курсу валют від НБУ"
+
+#. module: nbu_currency_rate
+#: model_terms:ir.ui.view,arch_db:nbu_currency_rate.nbu_currency_rate_updater_wizard_view_form
+msgid "Update"
+msgstr "Оновити"
+
+#. module: nbu_currency_rate
+#: model_terms:ir.ui.view,arch_db:nbu_currency_rate.nbu_currency_rate_updater_wizard_view_form
+msgid "Cancel"
+msgstr "Скасувати"
+
+#. module: nbu_currency_rate
+#: model_terms:ir.ui.view,arch_db:nbu_currency_rate.view_company_form
+msgid "National Bank of Ukraine (NBU)"
+msgstr "Національний банк України (НБУ)"
+
+#. module: nbu_currency_rate
+#: model_terms:ir.ui.view,arch_db:nbu_currency_rate.view_company_form
+msgid "Uses the free, public NBU REST API — no API key required."
+msgstr "Використовує безкоштовний публічний REST API НБУ — ключ API не потрібен."
+
+#. module: nbu_currency_rate
+#: model_terms:ir.ui.view,arch_db:nbu_currency_rate.view_company_form
+msgid "Rates are published daily around 15:30 Kyiv time (EET/EEST)."
+msgstr "Курси публікуються щодня приблизно о 15:30 за київським часом (EET/EEST)."
+
+#. module: nbu_currency_rate
+#: model_terms:ir.ui.view,arch_db:nbu_currency_rate.view_company_form
+msgid "Base currency: UAH (Ukrainian Hryvnia)."
+msgstr "Базова валюта: UAH (Українська гривня)."
+
+#. module: nbu_currency_rate
+#: model_terms:ir.ui.view,arch_db:nbu_currency_rate.view_company_form
+msgid "Official NBU exchange rates page →"
+msgstr "Офіційна сторінка курсів валют НБУ →"
+
+# ---------------------------------------------------------------------------
+# Cron job names
+# ---------------------------------------------------------------------------
+
+#. module: nbu_currency_rate
+#: model:ir.cron,name:nbu_currency_rate.ir_cron_currency_rate_update_nbu
+msgid "Currency: NBU rate update (Ukraine)"
+msgstr "Валюта: Оновлення курсів НБУ (Україна)"
