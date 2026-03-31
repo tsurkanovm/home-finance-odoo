@@ -1,4 +1,3 @@
-import json
 import logging
 
 import requests
@@ -14,15 +13,15 @@ TRANSACTION_ALL_URL = "/rest/V1/cashflow/incomes/all"
 TRANSFER_ALL_URL = "/rest/V1/cashflow/transfer/all"
 
 class MagentoIntegratorApi(models.AbstractModel):
-    _name = "magento.integrator.api"
+    _name = "magento_integrator.api"
     _description = "Magento API Service"
 
     def _get_config(self):
         icp = self.env["ir.config_parameter"].sudo()
         return {
             "base_url": (icp.get_param("magento_integrator.base_url") or "").rstrip("/"),
-            "token": icp.get_param("magento.integrator.api_token") or "",
-            "timeout": int(icp.get_param("magento.integrator.timeout", default="30")),
+            "token": icp.get_param("magento_integrator.api_token") or "",
+            "timeout": int(icp.get_param("magento_integrator.timeout", default="30")),
         }
 
     def _request(self, method, endpoint, params=None, payload=None):
