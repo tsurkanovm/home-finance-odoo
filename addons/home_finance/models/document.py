@@ -36,10 +36,10 @@ class Document(models.AbstractModel):
         # @todo allow to edit commentary for old records
         for record in self:
             if record.active and record.period and record.period < current_period:
-                raise ValidationError(
+                raise ValidationError(_(
                     "The period of an active document cannot be before the current period. "
                     "Please update the current period in settings or set the document as inactive."
-                )
+                ))
 
     @api.model_create_multi
     def create(self, vals):

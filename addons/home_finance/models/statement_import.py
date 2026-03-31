@@ -5,7 +5,7 @@ import pandas as pd
 from typing import Iterator
 from collections import defaultdict
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
@@ -56,19 +56,18 @@ class StatementImport(models.Model):
             accepted_file_type = record.import_rule_id.file_type
             if not record.filename.endswith(f'.{accepted_file_type}'):
                 raise ValidationError(
-                    f'The file must be a .{accepted_file_type} file.'
+                    _('The file must be a .%s file.') % accepted_file_type
                 )
 
     @api.depends('filename', 'wallet_id', 'period')
     def _compute_name(self):
         for record in self:
             if record.filename and record.wallet_id and record.period:
-                record.name = (
-                    f"Statement import for {record.wallet_id.name} "
-                    f"on {record.period}"
+                record.name = _("Statement import for %s on %s") % (
+                    record.wallet_id.name, record.period
                 )
             else:
-                record.name = "New Statement Import"
+                record.name = _("New Statement Import")
 
     # ACTION METHODS
     def action_parse(self):
@@ -81,7 +80,7 @@ class StatementImport(models.Model):
 
         parser = parser_by_type.get(self.import_rule_id.file_type)
         if not parser:
-            raise ValidationError("Unsupported file type for now.")
+            raise ValidationError(_("Unsupported file type for now."))
 
         parser()
 

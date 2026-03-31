@@ -1,0 +1,959 @@
+# Ukrainian translation for home_finance module
+# Copyright (C) 2026 Mykhailo Tsurkanov
+# This file is distributed under the same license as the home_finance module.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-30 00:00+0000\n"
+"PO-Revision-Date: 2026-03-30 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+# ---------------------------------------------------------------------------
+# Module metadata
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.module.module,shortdesc:base.module_home_finance
+msgid "Home Finance"
+msgstr "Домашні фінанси"
+
+# ---------------------------------------------------------------------------
+# Model names (_description)
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_wallet
+msgid "Wallet for home finance management"
+msgstr "Гаманець для управління домашніми фінансами"
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_category
+msgid "Transaction Category"
+msgstr "Категорія транзакцій"
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_project
+msgid "Transaction Project"
+msgstr "Проект транзакцій"
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_document
+msgid "Abstract model for documents"
+msgstr "Абстрактна модель документів"
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_transaction
+msgid "Home Finance Transaction"
+msgstr "Транзакція домашніх фінансів"
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_transfer
+msgid "Transfer between wallets"
+msgstr "Переказ між гаманцями"
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_bank
+msgid "Bank"
+msgstr "Банк"
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_statement_import
+msgid "Bank Statement Import"
+msgstr "Імпорт банківської виписки"
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_statement_import_line
+msgid "Bank Statement Import Line"
+msgstr "Рядок імпорту банківської виписки"
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_statement_import_rule
+msgid "Rule for importing bank statements"
+msgstr "Правило імпорту банківських виписок"
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_statement_import_rule_line
+msgid "Statement Import Rule Line"
+msgstr "Рядок правила імпорту виписки"
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_wallet_balance
+msgid "Wallet balance for home finance management"
+msgstr "Баланс гаманця для управління домашніми фінансами"
+
+#. module: home_finance
+#: model:ir.model,name:home_finance.model_home_finance_wallet_balance_recalculate_wizard
+msgid "Recalculate Wallet Balances"
+msgstr "Перерахунок балансів гаманців"
+
+# ---------------------------------------------------------------------------
+# Field strings — wallet
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__name
+msgid "Wallet Name"
+msgstr "Назва гаманця"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__type
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transaction__type
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__type
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule_line__type
+msgid "Type"
+msgstr "Тип"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__currency_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transaction__currency_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__currency_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet_balance__currency_id
+msgid "Currency"
+msgstr "Валюта"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__active
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_category__active
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_bank__active
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_document__active
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule__active
+msgid "Active"
+msgstr "Активний"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__bank_id
+msgid "Bank"
+msgstr "Банк"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__user_id
+msgid "User"
+msgstr "Користувач"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__transaction_ids
+msgid "Transactions"
+msgstr "Транзакції"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__transfer_source_ids
+msgid "Transfers From This Wallet"
+msgstr "Перекази з цього гаманця"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__transfer_destination_ids
+msgid "Transfers To This Wallet"
+msgstr "Перекази на цей гаманець"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__expense_amount
+msgid "Total Expenses"
+msgstr "Загальні витрати"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__income_amount
+msgid "Total Incomes"
+msgstr "Загальні доходи"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__transfer_out_amount
+msgid "Total Transfers Out"
+msgstr "Загальні вихідні перекази"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet__transfer_in_amount
+msgid "Total Transfers In"
+msgstr "Загальні вхідні перекази"
+
+# ---------------------------------------------------------------------------
+# Field strings — category, project, bank
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_category__name
+msgid "Category Name"
+msgstr "Назва категорії"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_project__name
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule__name
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import__name
+msgid "Name"
+msgstr "Назва"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_bank__name
+msgid "Bank Name"
+msgstr "Назва банку"
+
+# ---------------------------------------------------------------------------
+# Field strings — document (abstract)
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_document__period
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import__period
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet_balance__period
+msgid "Period"
+msgstr "Період"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_document__comment
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__comment
+msgid "Commentary"
+msgstr "Коментар"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_document__is_current_period
+msgid "Is Current Period"
+msgstr "Поточний Період"
+
+# ---------------------------------------------------------------------------
+# Field strings — transaction
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transaction__type
+msgid "Movement Type"
+msgstr "Тип руху"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transaction__wallet_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import__wallet_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__wallet_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule__wallet_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet_balance__wallet_id
+msgid "Wallet"
+msgstr "Гаманець"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transaction__category_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__category_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule_line__category_id
+msgid "Category"
+msgstr "Категорія"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transaction__project_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__project_id
+msgid "Project"
+msgstr "Проект"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transaction__amount
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__amount
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet_balance__amount
+msgid "Amount"
+msgstr "Сума"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transaction__base_currency_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet_balance__base_currency_id
+msgid "Base Currency"
+msgstr "Базова валюта"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transaction__base_amount
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet_balance__base_amount
+msgid "Base Amount"
+msgstr "Базова сума"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transaction__name
+msgid "Transaction Name"
+msgstr "Назва транзакції"
+
+# ---------------------------------------------------------------------------
+# Field strings — transfer
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transfer__source_wallet_id
+msgid "From Wallet"
+msgstr "Гаманець відправника"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transfer__destination_wallet_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__destination_wallet_id
+msgid "To Wallet"
+msgstr "Гаманець отримувача"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transfer__source_currency_id
+msgid "From Currency"
+msgstr "Валюта відправника"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transfer__source_amount
+msgid "From Amount"
+msgstr "Сума відправника"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transfer__destination_currency_id
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__destination_currency_id
+msgid "To Currency"
+msgstr "Валюта отримувача"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transfer__destination_amount
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__destination_amount
+msgid "To Amount"
+msgstr "Сума отримувача"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_transfer__name
+msgid "Transaction Name"
+msgstr "Назва транзакції"
+
+# ---------------------------------------------------------------------------
+# Field strings — statement import
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import__import_rule_id
+msgid "Statement Import Rule"
+msgstr "Правило імпорту виписки"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import__file
+msgid "File"
+msgstr "Файл"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import__filename
+msgid "Filename"
+msgstr "Ім'я файлу"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import__line_ids
+msgid "Statement Lines"
+msgstr "Рядки виписки"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__statement_purpose
+msgid "Statement Purpose"
+msgstr "Призначення виписки"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__status
+msgid "Status"
+msgstr "Статус"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__statement_import_id
+msgid "Statement Import"
+msgstr "Імпорт виписки"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_line__display_line_no
+msgid "Line No."
+msgstr "№ рядка"
+
+# ---------------------------------------------------------------------------
+# Field strings — statement import rule
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule__file_type
+msgid "File Type"
+msgstr "Тип файлу"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule__statement_purpose_column
+msgid "Statement Purpose Column"
+msgstr "Стовпець призначення виписки"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule__statement_commentary_column
+msgid "Statement Commentary Column"
+msgstr "Стовпець коментарю виписки"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule__statement_amount_column
+msgid "Statement Amount Column"
+msgstr "Стовпець суми виписки"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule__statement_first_row
+msgid "Statement First Row"
+msgstr "Перший рядок виписки"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule__rule_line_ids
+msgid "Rule Mapping Lines"
+msgstr "Рядки відображення правила"
+
+# ---------------------------------------------------------------------------
+# Field strings — statement import rule line
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule_line__rule_id
+msgid "Import Rule"
+msgstr "Правило імпорту"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule_line__sequence
+msgid "Sequence"
+msgstr "Послідовність"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule_line__purpose_key_word
+msgid "Purpose Keyword"
+msgstr "Ключове слово призначення"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_statement_import_rule_line__commentary_key_word
+msgid "Commentary Keyword"
+msgstr "Ключове слово коментарю"
+
+# ---------------------------------------------------------------------------
+# Field strings — res.config.settings
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_res_config_settings__home_finance_statement_import_ttl
+msgid "Statement Import TTL (months)"
+msgstr "Термін зберігання імпорту виписок (місяців)"
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_res_config_settings__home_finance_current_period
+msgid "Current Period"
+msgstr "Поточний Період"
+
+# ---------------------------------------------------------------------------
+# Field strings — wallet balance
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.fields,help:home_finance.field_home_finance_wallet_balance__period
+msgid "Last period used during balance calculation."
+msgstr "Останній період, використаний при розрахунку балансу."
+
+# ---------------------------------------------------------------------------
+# Field strings — wizard
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.fields,field_description:home_finance.field_home_finance_wallet_balance_recalculate_wizard__note
+msgid "Info"
+msgstr "Інформація"
+
+# ---------------------------------------------------------------------------
+# Selection values
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_transaction__type__income
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_statement_import_line__type__income
+msgid "Income"
+msgstr "Дохід"
+
+#. module: home_finance
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_transaction__type__expense
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_statement_import_line__type__expense
+msgid "Expense"
+msgstr "Витрата"
+
+#. module: home_finance
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_wallet__type__cash
+msgid "Cash"
+msgstr "Готівка"
+
+#. module: home_finance
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_wallet__type__account
+msgid "Account"
+msgstr "Рахунок"
+
+#. module: home_finance
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_wallet__type__invest
+msgid "Investment"
+msgstr "Інвестиції"
+
+#. module: home_finance
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_statement_import_line__type__transfer
+msgid "TRAN"
+msgstr "Переказ"
+
+#. module: home_finance
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_statement_import_line__status__draft
+msgid "Draft"
+msgstr "Чернетка"
+
+#. module: home_finance
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_statement_import_line__status__converted
+msgid "Converted"
+msgstr "Конвертовано"
+
+#. module: home_finance
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_statement_import_line__status__error
+msgid "Error"
+msgstr "Помилка"
+
+#. module: home_finance
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_statement_import_rule__file_type__csv
+msgid "CSV"
+msgstr "CSV"
+
+#. module: home_finance
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_statement_import_rule__file_type__xlsx
+msgid "Excel XLSX"
+msgstr "Excel XLSX"
+
+#. module: home_finance
+#: model:ir.model.fields.selection,name:home_finance.selection__home_finance_statement_import_rule__file_type__xls
+msgid "Excel"
+msgstr "Excel"
+
+# ---------------------------------------------------------------------------
+# Constraint messages
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.model.constraint,message:home_finance.constraint_home_finance_wallet__check_name_uniqueness
+msgid "The wallet name must be unique!"
+msgstr "Назва гаманця повинна бути унікальною!"
+
+#. module: home_finance
+#: model:ir.model.constraint,message:home_finance.constraint_home_finance_category__check_name_type_uniqueness
+msgid "The name and type must be unique!"
+msgstr "Назва та тип повинні бути унікальними!"
+
+#. module: home_finance
+#: model:ir.model.constraint,message:home_finance.constraint_home_finance_transfer__check_amounts
+msgid "The From Amount or To Amount must be positive."
+msgstr "Сума відправника або сума отримувача повинна бути позитивною."
+
+#. module: home_finance
+#: model:ir.model.constraint,message:home_finance.constraint_home_finance_transfer__check_wallets_equality
+msgid "Wallets should be different."
+msgstr "Гаманці мають бути різними."
+
+#. module: home_finance
+#: model:ir.model.constraint,message:home_finance.constraint_home_finance_wallet_balance__check_wallet_uniqueness
+msgid "Balance for this wallet already exists."
+msgstr "Баланс для цього гаманця вже існує."
+
+# ---------------------------------------------------------------------------
+# Code strings (Python _() calls)
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: code:addons/home_finance/models/document.py:0
+#, python-format
+msgid ""
+"The period of an active document cannot be before the current period. "
+"Please update the current period in settings or set the document as "
+"inactive."
+msgstr ""
+"Період активного документу не може бути раніше поточного періоду. "
+"Будь ласка, оновіть поточний період у налаштуваннях або позначте документ "
+"як неактивний."
+
+#. module: home_finance
+#: code:addons/home_finance/models/document.py:0
+#, python-format
+msgid "Unsupported operator '%s' for is_current_period"
+msgstr "Непідтримуваний оператор '%s' для is_current_period"
+
+#. module: home_finance
+#: code:addons/home_finance/models/transaction.py:0
+msgid "New Transaction"
+msgstr "Нова транзакція"
+
+#. module: home_finance
+#: code:addons/home_finance/models/transfer.py:0
+#, python-format
+msgid "Transfer from %s to %s"
+msgstr "Переказ від %s до %s"
+
+#. module: home_finance
+#: code:addons/home_finance/models/transfer.py:0
+msgid "New Transfer"
+msgstr "Новий переказ"
+
+#. module: home_finance
+#: code:addons/home_finance/models/transfer.py:0
+msgid ""
+"When transferring between the same currencies, "
+"the From Amount and To Amount cannot be the same."
+msgstr ""
+"При переказі між однаковими валютами "
+"сума «Від» та сума «До» не можуть збігатися."
+
+#. module: home_finance
+#: code:addons/home_finance/models/wallet.py:0
+msgid "You cannot change a wallet that has existing transactions."
+msgstr "Ви не можете змінити гаманець, який має існуючі транзакції."
+
+#. module: home_finance
+#: code:addons/home_finance/models/wallet.py:0
+msgid "You cannot change a wallet that has existing transfers."
+msgstr "Ви не можете змінити гаманець, який має існуючі перекази."
+
+#. module: home_finance
+#: code:addons/home_finance/models/statement_import.py:0
+#, python-format
+msgid "The file must be a .%s file."
+msgstr "Файл повинен мати розширення .%s."
+
+#. module: home_finance
+#: code:addons/home_finance/models/statement_import.py:0
+#, python-format
+msgid "Statement import for %s on %s"
+msgstr "Імпорт виписки для %s за %s"
+
+#. module: home_finance
+#: code:addons/home_finance/models/statement_import.py:0
+msgid "New Statement Import"
+msgstr "Новий імпорт виписки"
+
+#. module: home_finance
+#: code:addons/home_finance/models/statement_import.py:0
+msgid "Unsupported file type for now."
+msgstr "Непідтримуваний тип файлу."
+
+#. module: home_finance
+#: code:addons/home_finance/models/statement_import_rule.py:0
+#, python-format
+msgid "Import Rule for %s (%s)"
+msgstr "Правило імпорту для %s (%s)"
+
+#. module: home_finance
+#: code:addons/home_finance/models/statement_import_rule.py:0
+msgid "New Import Rule"
+msgstr "Нове правило імпорту"
+
+#. module: home_finance
+#: code:addons/home_finance/models/statement_import_line.py:0
+#, python-format
+msgid ""
+"Validation error in %(line)s: Wallet, To Wallet, Amount and To Amount must "
+"be set."
+msgstr ""
+"Помилка валідації в %(line)s: гаманець, цільовий гаманець, сума та сума "
+"отримувача повинні бути заповнені."
+
+#. module: home_finance
+#: code:addons/home_finance/models/statement_import_line.py:0
+#, python-format
+msgid "Validation error in %(line)s: Wallet, Category and Amount must be set."
+msgstr ""
+"Помилка валідації в %(line)s: гаманець, категорія та сума повинні бути "
+"заповнені."
+
+#. module: home_finance
+#: code:addons/home_finance/models/statement_import_rule_line.py:0
+msgid "Please save the import rule first, then duplicate the line."
+msgstr "Спочатку збережіть правило імпорту, а потім дублюйте рядок."
+
+#. module: home_finance
+#: code:addons/home_finance/wizard/wallet_balance_recalculate_wizard.py:0
+msgid "This action recalculates wallet balances from source documents."
+msgstr "Ця дія перераховує баланси гаманців з вихідних документів."
+
+#. module: home_finance
+#: code:addons/home_finance/wizard/wallet_balance_recalculate_wizard.py:0
+msgid "Wallet Balances"
+msgstr "Баланси гаманців"
+
+# ---------------------------------------------------------------------------
+# Action names
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_transaction_income_action
+msgid "Income Transactions"
+msgstr "Транзакції доходів"
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_transaction_expense_action
+msgid "Expense Transactions"
+msgstr "Транзакції витрат"
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_transaction_action
+msgid "Transactions"
+msgstr "Транзакції"
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_transfer_action
+msgid "Transfers"
+msgstr "Перекази"
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_transfer_in_action
+msgid "Transfers In"
+msgstr "Вхідні перекази"
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_transfer_out_action
+msgid "Transfers Out"
+msgstr "Вихідні перекази"
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_wallet_action
+msgid "Wallets"
+msgstr "Гаманці"
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_category_action
+msgid "Transaction Categories"
+msgstr "Категорії транзакцій"
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_project_action
+msgid "Transaction Projects"
+msgstr "Проекти транзакцій"
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_statement_import_action
+msgid "Import Bank Statement"
+msgstr "Імпорт банківської виписки"
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_statement_import_rule_action
+msgid "Statement Import Rules"
+msgstr "Правила імпорту виписок"
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_wallet_balance_action
+msgid "Balance"
+msgstr "Баланс"
+
+#. module: home_finance
+#: model:ir.actions.act_window,name:home_finance.hf_wallet_balance_recalculate_wizard_action
+msgid "Recalculate Wallet Balances"
+msgstr "Перерахунок балансів гаманців"
+
+# ---------------------------------------------------------------------------
+# Menu names
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_menu_root
+msgid "Home Finance"
+msgstr "Домашні фінанси"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_doc_menu
+msgid "Documents"
+msgstr "Документи"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_transaction_model_menu_action
+msgid "Transaction"
+msgstr "Транзакція"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_transfer_model_menu_action
+msgid "Transfer"
+msgstr "Переказ"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_statement_import_menu_action
+msgid "Import Bank Statement"
+msgstr "Імпорт банківської виписки"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_wallet_balance_recalculate_menu
+msgid "Recalculate Balance"
+msgstr "Перерахувати баланс"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_setting_menu
+msgid "Settings"
+msgstr "Налаштування"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_wallet_model_menu_action
+msgid "Wallet"
+msgstr "Гаманець"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_category_model_menu_action
+msgid "Transaction Category"
+msgstr "Категорія транзакцій"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_project_model_menu_action
+msgid "Transaction Project"
+msgstr "Проект транзакцій"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_statement_import_rule_menu_action
+msgid "Statement Rules"
+msgstr "Правила виписок"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_currency_model_menu_action
+msgid "Currency"
+msgstr "Валюта"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_report_menu
+msgid "Reports"
+msgstr "Звіти"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_wallet_balance_menu_action
+msgid "Balance"
+msgstr "Баланс"
+
+# ---------------------------------------------------------------------------
+# View XML strings — search filters, buttons, labels, page/group titles
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_transaction_view_graph
+msgid "Category Analysis"
+msgstr "Аналіз категорій"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_transaction_view_filter
+msgid "Transactions"
+msgstr "Транзакції"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_transaction_view_filter
+msgid "Date"
+msgstr "Дата"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_transaction_view_filter
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_transfer_view_filter
+msgid "Current Period"
+msgstr "Поточний Період"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_transaction_view_filter
+msgid "Transaction: Last 365 Days"
+msgstr "Транзакція: Останні 365 днів"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_transaction_view_filter
+msgid "Expenses"
+msgstr "Витрати"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_transaction_view_filter
+msgid "Incomes"
+msgstr "Доходи"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_transfer_view_filter
+msgid "Transfer"
+msgstr "Переказ"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_transfer_view_form
+msgid "From"
+msgstr "Від"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_transfer_view_form
+msgid "To"
+msgstr "До"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_wallet_view_form
+msgid "Wallet Income Transactions"
+msgstr "Транзакції доходів гаманця"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_wallet_view_form
+msgid "Wallet Expense Transactions"
+msgstr "Транзакції витрат гаманця"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_wallet_view_form
+msgid "Wallet In Transfers"
+msgstr "Вхідні перекази гаманця"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_wallet_view_form
+msgid "Wallet Out Transfers"
+msgstr "Вихідні перекази гаманця"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_statement_import_view_form
+msgid "Parse File"
+msgstr "Розібрати файл"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_statement_import_view_form
+msgid "Convert Lines Into Documents"
+msgstr "Конвертувати рядки в документи"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_statement_import_view_form
+msgid "Import Lines"
+msgstr "Рядки імпорту"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_statement_import_line_view_list
+msgid "Mark as Fixed"
+msgstr "Позначити як виправлено"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_statement_import_rule_view_form
+msgid "General"
+msgstr "Загальне"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_statement_import_rule_view_form
+msgid "Statement Columns Mapping"
+msgstr "Відображення стовпців виписки"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_statement_import_rule_view_form
+msgid "Import Rules"
+msgstr "Правила імпорту"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_statement_import_rule_line_view_form
+msgid "Save and Duplicate"
+msgstr "Зберегти та дублювати"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_wallet_balance_recalculate_wizard_view_form
+msgid "Recalculate Wallet Balances"
+msgstr "Перерахунок балансів гаманців"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_wallet_balance_recalculate_wizard_view_form
+msgid "Calculate"
+msgstr "Розрахувати"
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_wallet_balance_recalculate_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_statement_import_view_form
+msgid "Cancel"
+msgstr "Скасувати"
+
+# ---------------------------------------------------------------------------
+# Config settings view
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model_terms:ir.ui.view,arch_db:home_finance.hf_view_settings
+msgid "Statement Import TTL"
+msgstr "Термін зберігання імпорту виписок"
+
+# ---------------------------------------------------------------------------
+# Cron job names
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#: model:ir.cron,name:home_finance.ir_cron_statement_import_cleanup
+msgid "Home Finance: Cleanup Expired Statement Imports"
+msgstr "Домашні фінанси: Очищення застарілих імпортів виписок"

@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.tools import float_compare
 from odoo.exceptions import ValidationError
 
@@ -38,9 +38,9 @@ class Transfer(models.Model):
     def _compute_name(self):
         for transfer in self:
             if transfer.source_wallet_id and transfer.destination_wallet_id:
-                transfer.name = f"Transfer from {transfer.source_wallet_id.name} to {transfer.destination_wallet_id.name}"
+                transfer.name = _("Transfer from %s to %s") % (transfer.source_wallet_id.name, transfer.destination_wallet_id.name)
             else:
-                transfer.name = "New Transfer"
+                transfer.name = _("New Transfer")
 
     # -------------------------------------------------------------------------
     # CONSTRAIN METHODS
@@ -50,8 +50,10 @@ class Transfer(models.Model):
         for transfer in self:
             if ((transfer.source_currency_id == transfer.destination_currency_id)
                     and (float_compare(transfer.source_amount,transfer.destination_amount, precision_digits=0) > 0)):
-                raise ValidationError("When transferring between the same currencies, "
-                                      "the From Amount and To Amount cannot be the same.")
+                raise ValidationError(_(
+                    "When transferring between the same currencies, "
+                    "the From Amount and To Amount cannot be the same."
+                ))
 
     # -------------------------------------------------------------------------
     # ONCHANGE METHODS

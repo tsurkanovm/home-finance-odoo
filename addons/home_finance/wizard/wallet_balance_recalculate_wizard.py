@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, _
 
 class WalletBalanceRecalculateWizard(models.TransientModel):
     _name = 'home_finance.wallet.balance.recalculate.wizard'
@@ -7,7 +7,7 @@ class WalletBalanceRecalculateWizard(models.TransientModel):
     note = fields.Text(
         string='Info',
         readonly=True,
-        default='This action recalculates wallet balances from source documents.'
+        default=lambda self: _('This action recalculates wallet balances from source documents.')
     )
 
     def action_calculate(self):
@@ -17,7 +17,7 @@ class WalletBalanceRecalculateWizard(models.TransientModel):
 
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Wallet Balances',
+            'name': _('Wallet Balances'),
             'res_model': 'home_finance.wallet.balance',
             'view_mode': 'pivot',
             'target': 'current',

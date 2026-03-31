@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 from ..constant import WALLET_TYPE_SELECTION, WALLET_ACCOUNT_TYPE
 
@@ -74,13 +74,14 @@ class Wallet(models.Model):
 
     def check_on_existing_transactions(self, wallet):
         if self.env['home_finance.transaction'].search([('wallet_id', '=', wallet.id)], limit=1):
-            raise ValidationError(
+            raise ValidationError(_(
                 "You cannot change a wallet that has existing transactions."
-            )
+            ))
 
     def check_on_existing_transfer(self, wallet):
         existing_transfers = self.env['home_finance.transfer'].search(
             ['|', ('source_wallet_id', '=', wallet.id), ('destination_wallet_id', '=', wallet.id)], limit=1)
         if existing_transfers:
-            raise ValidationError(
-                "You cannot change a wallet that has existing transfers.")
+            raise ValidationError(_(
+                "You cannot change a wallet that has existing transfers."
+            ))

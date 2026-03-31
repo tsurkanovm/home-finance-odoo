@@ -1,4 +1,4 @@
-from odoo import models, fields,api
+from odoo import models, fields, api, _
 
 class StatementImportRule(models.Model):
     _name = 'home_finance.statement.import.rule'
@@ -29,6 +29,6 @@ class StatementImportRule(models.Model):
     def _compute_name(self):
         for record in self:
             if record.wallet_id and record.file_type:
-                record.name = f"Import Rule for {record.wallet_id.name} ({record.file_type.upper()})"
+                record.name = _("Import Rule for %s (%s)") % (record.wallet_id.name, record.file_type.upper())
             else:
-                record.name = "New Import Rule"
+                record.name = _("New Import Rule")
