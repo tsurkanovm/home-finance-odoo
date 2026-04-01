@@ -39,6 +39,7 @@ class RunnerWizard(models.TransientModel):
             'type': 'ir.actions.act_window',
             'name': _('Transactions'),
             'res_model': 'home_finance.transaction',
+            'view_mode': 'list',
         }
 
     def _transfer(self):
@@ -47,6 +48,7 @@ class RunnerWizard(models.TransientModel):
             'type': 'ir.actions.act_window',
             'name': _('Transfers'),
             'res_model': 'home_finance.transfer',
+            'view_mode': 'list',
         }
 
     def _project(self):

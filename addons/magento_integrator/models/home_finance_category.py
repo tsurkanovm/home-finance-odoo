@@ -1,7 +1,4 @@
-import logging
-from odoo import models, fields, api
-
-_logger = logging.getLogger(__name__)
+from odoo import models
 
 class Category(models.Model):
     _name = "home_finance.category"
