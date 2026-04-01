@@ -5,3 +5,4 @@ from . import home_finance_category
 from . import home_finance_project
 from . import home_finance_transaction
 from . import home_finance_wallet
+from . import home_finance_transfer

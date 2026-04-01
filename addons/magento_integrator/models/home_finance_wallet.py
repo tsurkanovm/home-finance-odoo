@@ -19,7 +19,7 @@ class Wallet(models.Model):
 
     def get_wallet_by_id_and_currency(self, m2_id, currency):
         key = f"{m2_id}_{currency}"
-        existing_wallet = self.search([('m2_id', '=', key)], limit=1)
+        existing_wallet = self.with_context(active_test=False).search([('m2_id', '=', key)], limit=1)
         if existing_wallet:
             return existing_wallet
         else:
