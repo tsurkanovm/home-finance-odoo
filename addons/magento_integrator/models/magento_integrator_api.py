@@ -79,4 +79,18 @@ class MagentoIntegratorApi(models.AbstractModel):
     def get_transfer_all(self):
         return self._request("GET", TRANSFER_ALL_URL)
 
-
+    def get_project_all(self):
+        # hardcoded project data, cause M2 does not have endpoint and we have just few projects
+        return [
+            {"id": 1, "title": "Invest to Forex"},
+            {"id": 2, "title": "Stolichnyi"},
+            {"id": 3, "title": "Margo"},
+            {"id": 4, "title": "Blog samoinvestor"},
+            {"id": 6, "title": "Vacation"},
+            {"id": 7, "title": "Tasya"},
+            {"id": 8, "title": "х/ш 166"},
+            {"id": 9, "title": "Starlink"},
+            {"id": 10, "title": "OVDP"},
+            {"id": 11, "title": "IBK"},
+            {"id": 12, "title": "YouTube"},
+        ]
