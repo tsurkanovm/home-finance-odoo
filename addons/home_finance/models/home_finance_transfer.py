@@ -48,12 +48,15 @@ class Transfer(models.Model):
     @api.constrains('source_currency_id', 'destination_currency_id', 'source_amount', 'destination_amount')
     def _check_wallets_and_currencies(self):
         for transfer in self:
+            #skip if this checkup, if this transfer goes from Magento (artifact of the old system)
+            if transfer.m2_id:
+                continue
             if ((transfer.source_currency_id == transfer.destination_currency_id)
-                    and (float_compare(transfer.source_amount,transfer.destination_amount, precision_digits=0) > 0)):
+                    and (float_compare(transfer.source_amount,transfer.destination_amount, precision_digits=2) != 0)):
                 raise ValidationError(_(
                     "When transferring between the same currencies, "
-                    "the From Amount and To Amount cannot be the same."
-                ))
+                    "the From Amount and To Amount should be different. Transfer name %s, source amount: %s destination amount: %s"
+                ) % (transfer.name, transfer.source_amount, transfer.destination_amount))
 
     # -------------------------------------------------------------------------
     # ONCHANGE METHODS
