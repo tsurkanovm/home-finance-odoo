@@ -449,10 +449,26 @@
     </record>
 
     <!-- Balance views    -->
+    <record id="hf_wallet_balance_filter" model="ir.ui.view">
+        <field name="name">home_finance.wallet.balance.view.filter</field>
+        <field name="model">home_finance.wallet.balance</field>
+        <field name="arch" type="xml">
+            <search string="Wallet Balances">
+                <field name="wallet_id"/>
+                <filter string="Actual" name="filter_actual" domain="[('amount', '!=', 0)]"/>
+                <separator/>
+
+                <group>
+                    <filter name="currency_id" context="{'group_by': 'currency_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
     <record id="hf_wallet_balance_action" model="ir.actions.act_window">
         <field name="name">Balance</field>
         <field name="res_model">home_finance.wallet.balance</field>
         <field name="view_mode">list,pivot</field>
+        <field name="context">{'search_default_filter_actual': 1}</field>
     </record>
     <record id="hf_wallet_balance_view_list" model="ir.ui.view">
         <field name="name">home_finance.wallet.balance.view.list</field>
