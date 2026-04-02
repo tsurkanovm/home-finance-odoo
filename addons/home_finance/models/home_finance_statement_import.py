@@ -24,6 +24,7 @@ class StatementImport(models.Model):
     period = fields.Date(
         string='Period',
         required=True,
+        index=True,
         default=fields.Date.context_today,
     )
     wallet_id = fields.Many2one(

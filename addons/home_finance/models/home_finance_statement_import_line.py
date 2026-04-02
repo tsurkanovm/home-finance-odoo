@@ -23,7 +23,8 @@ class StatementImportLine(models.Model):
     status = fields.Selection(string='Status',
                               required=True,
                               selection=[('draft', 'Draft'), ('converted', 'Converted'), ('error', 'Error')],
-                              default='draft')
+                              default='draft',
+                              index=True)
     statement_import_id = fields.Many2one('home_finance.statement.import', string='Statement Import', ondelete='cascade')
 
     display_line_no = fields.Integer(

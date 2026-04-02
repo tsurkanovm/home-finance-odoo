@@ -19,6 +19,7 @@ class WalletBalance(models.Model):
     period = fields.Date(
         string='Period',
         required=True,
+        index=True,
         help='Last period used during balance calculation.',
     )
     currency_id = fields.Many2one(

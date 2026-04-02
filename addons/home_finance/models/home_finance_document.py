@@ -7,11 +7,12 @@ class Document(models.AbstractModel):
     _description = 'Abstract model for documents'
     _order = 'period desc, id desc'
 
-    active = fields.Boolean(string='Active', default=True)
+    active = fields.Boolean(string='Active', default=True, index=True)
     period = fields.Date(
         string='Period',
         default=lambda self: get_end_of_previous_month(fields.Date.context_today(self)),
         required=True,
+        index=True,
     )
     comment = fields.Text(string='Commentary')
 

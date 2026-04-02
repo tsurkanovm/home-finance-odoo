@@ -7,12 +7,12 @@ class StatementImportRuleLine(models.Model):
     _description = 'Statement Import Rule Line'
 
     rule_id = fields.Many2one('home_finance.statement.import.rule', string='Import Rule', required=True, ondelete='cascade')
-    sequence = fields.Integer(string='Sequence', default=10)
+    sequence = fields.Integer(string='Sequence', default=10, index=True)
     type = fields.Selection(string='Movement Type', required=True, selection=STATEMENT_TYPE_SELECTION)
     wallet_id = fields.Many2one('home_finance.wallet', string='Wallet')
     category_id = fields.Many2one('home_finance.category', string='Category',
                                   domain="[('type', '=', type)]")
-    purpose_key_word = fields.Char(string='Purpose Keyword')
+    purpose_key_word = fields.Char(string='Purpose Keyword', index=True)
     commentary_key_word = fields.Char(string='Commentary Keyword')
 
     # def action_save_and_duplicate(self):
