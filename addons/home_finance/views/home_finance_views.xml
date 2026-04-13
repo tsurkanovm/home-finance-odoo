@@ -78,7 +78,7 @@
         <field name="model">home_finance.transaction</field>
         <field name="arch" type="xml">
             <graph string="Category Analysis" type="pie">
-                <field name="period" interval="month"/>
+                <field name="period" interval="year"/>
                 <field name="amount" type="measure"/>
                 <field name="category_id"/>
             </graph>
@@ -115,7 +115,7 @@
     <record id="hf_transaction_action" model="ir.actions.act_window">
         <field name="name">Transactions</field>
         <field name="res_model">home_finance.transaction</field>
-        <field name="view_mode">graph,list,form,pivot</field>
+        <field name="view_mode">list,graph,form,pivot</field>
         <field name="context">{'search_default_filter_expense': 1, 'search_default_current_period': 1}
         </field>
     </record>

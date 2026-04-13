@@ -19,6 +19,6 @@ class WalletBalanceRecalculateWizard(models.TransientModel):
             'type': 'ir.actions.act_window',
             'name': _('Wallet Balances'),
             'res_model': 'home_finance.wallet.balance',
-            'view_mode': 'pivot, list',
+            'view_mode': 'list, pivot',
             'target': 'current',
         }

@@ -65,8 +65,12 @@ class Wallet(models.Model):
 
     # CRUD METHODS
     def write(self, vals):
-        if 'currency_id' in vals or 'type' in vals or ('active' in vals and vals['active'] == False):
-            for wallet in self:
+        for wallet in self:
+            currency_changed = 'currency_id' in vals and vals['currency_id'] != wallet.currency_id.id
+            type_changed = 'type' in vals and vals['type'] != wallet.type
+            deactivated = 'active' in vals and not vals['active'] and wallet.active
+
+            if currency_changed or type_changed or deactivated:
                 self.check_on_existing_transactions(wallet)
                 self.check_on_existing_transfer(wallet)
 

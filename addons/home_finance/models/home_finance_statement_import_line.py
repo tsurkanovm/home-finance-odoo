@@ -51,6 +51,9 @@ class StatementImportLine(models.Model):
         self.status = 'draft'
         self.amount = abs(self.amount)
 
+    def _line_label(self):
+        return _("line #%(no)s") % {'no': self.display_line_no or self.id}
+
     def action_validate(self):
         self.ensure_one()
         if self.type == 'transfer' and not (self.wallet_id and self.destination_wallet_id and self.amount and self.destination_amount):
