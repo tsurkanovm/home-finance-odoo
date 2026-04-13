@@ -17,6 +17,7 @@ src/**
 !docker_scripts/**
 !.gitignore
 !requirements.txt
+!CLAUDE.md
 
 
 
