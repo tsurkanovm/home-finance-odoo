@@ -20,7 +20,7 @@ services:
     secrets:
       - postgresql_password
     ports:
-      - "127.0.0.1:18069:8069"
+      - "127.0.0.1:${ODOO_PORT}:8069"
     networks:
       - internal
       - proxy

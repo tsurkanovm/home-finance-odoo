@@ -2,7 +2,7 @@
 - **Stack**: Odoo 19.0 Community · Python 3.12 · PostgreSQL 18 · Docker
 - **Addons path**: `./addons/` (mounted as `/mnt/extra-addons`)
 - **Custom addons**: `home_finance` (14 models + 1 wizard), `nbu_currency_rate` (2 models + 1 wizard)
-- **DB**: `home_finance` (user: `odoo`)
+- **DB**: `hf` (user: `odoo`)
 
 ## Non-Obvious Architecture Facts
 - `home_finance.document` is an **abstract model** — never instantiated directly; `transaction` and `transfer` inherit it
@@ -58,7 +58,7 @@ docker compose logs -f web                                             # follow 
 docker compose logs --tail=200 web                                     # last 200 lines
 docker compose exec web bash                                           # shell into Odoo container
 docker compose exec web odoo -u home_finance --stop-after-init        # upgrade module
-docker compose exec db psql -U odoo -d home_finance                   # PostgreSQL shell
+docker compose exec db psql -U odoo -d hf                            # PostgreSQL shell
 ```
 
 ## Troubleshooting
