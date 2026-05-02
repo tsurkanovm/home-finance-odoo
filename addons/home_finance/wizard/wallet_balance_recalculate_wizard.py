@@ -15,10 +15,4 @@ class WalletBalanceRecalculateWizard(models.TransientModel):
 
         self.env['home_finance.wallet.balance'].action_calculate()
 
-        return {
-            'type': 'ir.actions.act_window',
-            'name': _('Wallet Balances'),
-            'res_model': 'home_finance.wallet.balance',
-            'view_mode': 'list, pivot',
-            'target': 'current',
-        }
+        return self.env.ref('home_finance.hf_wallet_balance_action').read()[0]

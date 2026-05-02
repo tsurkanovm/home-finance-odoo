@@ -31,3 +31,5 @@ docker compose exec db pg_dump -U odoo -Fc home_finance > hf_2026-03-31.dump
 #db restore
  docker compose exec -T db pg_restore -U odoo -d home_finance < hf_2026-03-31.dump
 
+ docker compose exec web odoo --config /etc/odoo/odoo.conf -d hf -i home_finance,nbu_currency_rate --load-language uk_UA --stop-after-init
+
