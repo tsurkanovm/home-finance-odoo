@@ -5,14 +5,14 @@
             <t t-if="state.loading">
                 <div class="hf-dashboard__loading">
                     <i class="fa fa-spinner fa-spin fa-2x" />
-                    <span>Loading dashboard...</span>
+                    <span t-esc="_t('Loading dashboard...')" />
                 </div>
             </t>
             <t t-else="">
                 <div class="hf-dashboard__header">
-                    <h2>Home Finance Dashboard</h2>
+                    <h2 t-esc="_t('Home Finance Dashboard')" />
                     <span t-if="state.currentPeriod" class="hf-dashboard__period">
-                        Period: <strong t-esc="state.currentPeriod" />
+                        <t t-esc="_t('Period:')" /> <strong t-esc="state.currentPeriod" />
                     </span>
                     <div class="hf-dashboard__currency-switcher">
                         <t t-foreach="currencyOptions" t-as="cur" t-key="cur">
@@ -27,29 +27,29 @@
 
                 <div class="hf-dashboard__cards">
                     <StatCard
-                        title="'Total Balance'"
+                        title="_t('Total Balance')"
                         value="balanceSummary"
                         icon="'wallet'"
                         variant="'primary'"
                     />
                     <StatCard
-                        title="'Expenses'"
+                        title="_t('Expenses')"
                         value="formattedExpense"
-                        subtitle="'Current period'"
+                        subtitle="_t('Current period')"
                         icon="'arrow-down'"
                         variant="'danger'"
                     />
                     <StatCard
-                        title="'Income'"
+                        title="_t('Income')"
                         value="formattedIncome"
-                        subtitle="'Current period'"
+                        subtitle="_t('Current period')"
                         icon="'arrow-up'"
                         variant="'success'"
                     />
                     <StatCard
-                        title="'Top Category'"
+                        title="_t('Top Category')"
                         value="topCategoryName"
-                        subtitle="'Highest expense'"
+                        subtitle="_t('Highest expense')"
                         icon="'tag'"
                         variant="'warning'"
                     />
@@ -57,15 +57,14 @@
 
                 <div class="hf-dashboard__chart-section">
                     <div class="hf-dashboard__chart-header">
-                        <h3>Expense Trend</h3>
+                        <h3 t-esc="_t('Expense Trend')" />
                         <div class="hf-dashboard__filters">
                             <t t-foreach="[3, 6, 12]" t-as="months" t-key="months">
                                 <button
                                     t-attf-class="btn btn-sm {{ state.filterMonths === months ? 'btn-primary' : 'btn-outline-primary' }}"
                                     t-on-click="() => this.setFilter(months)"
-                                >
-                                    <t t-esc="months" /> months
-                                </button>
+                                    t-esc="`${months} ${_t('months')}`"
+                                />
                             </t>
                         </div>
                     </div>
@@ -73,12 +72,12 @@
                 </div>
 
                 <div t-if="state.topCategories.length" class="hf-dashboard__categories">
-                    <h3>Top Expense Categories (Current Period)</h3>
+                    <h3 t-esc="_t('Top Expense Categories (Current Period)')" />
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <th>Category</th>
-                                <th class="text-end">Amount</th>
+                                <th t-esc="_t('Category')" />
+                                <th class="text-end" t-esc="_t('Amount')" />
                             </tr>
                         </thead>
                         <tbody>

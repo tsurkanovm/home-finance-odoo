@@ -2,6 +2,7 @@
 import { Component, useState, onWillStart } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
+import { _t } from "@web/core/l10n/translation";
 import { StatCard } from "../components/stat_card/stat_card";
 import { ExpenseChart } from "../components/expense_chart/expense_chart";
 
@@ -32,6 +33,7 @@ class HfDashboard extends Component {
     static components = { StatCard, ExpenseChart };
 
     setup() {
+        this._t = _t;
         this.orm = useService("orm");
         this.currencyOptions = CURRENCY_OPTIONS;
         this.state = useState({
@@ -137,7 +139,7 @@ class HfDashboard extends Component {
     }
 
     get balanceSummary() {
-        if (!this.state.balances.length) return "No data";
+        if (!this.state.balances.length) return _t("No data");
         return this.state.balances
             .map((b) => `${this._fmt(b["amount:sum"])} ${b.currency_id[1]}`)
             .join(" | ");
@@ -152,15 +154,15 @@ class HfDashboard extends Component {
     }
 
     get topCategoryName() {
-        if (!this.state.topCategories.length) return "None";
+        if (!this.state.topCategories.length) return _t("None");
         const top = this.state.topCategories[0];
-        const name = top.category_id ? top.category_id[1] : "Uncategorized";
+        const name = top.category_id ? top.category_id[1] : _t("Uncategorized");
         return `${name} ${this._fmt(this._convert(top["base_amount:sum"]))} ${this.state.selectedCurrency}`;
     }
 
     get formattedCategories() {
         return this.state.topCategories.map((cat) => ({
-            name: cat.category_id ? cat.category_id[1] : "Uncategorized",
+            name: cat.category_id ? cat.category_id[1] : _t("Uncategorized"),
             amount: `${this._fmt(this._convert(cat["base_amount:sum"]))} ${this.state.selectedCurrency}`,
         }));
     }
