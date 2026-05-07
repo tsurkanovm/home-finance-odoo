@@ -16,7 +16,7 @@
 
     &__header {
         display: flex;
-        align-items: baseline;
+        align-items: center;
         gap: 16px;
         margin-bottom: 24px;
 
@@ -29,6 +29,12 @@
     &__period {
         color: #6c757d;
         font-size: 0.9em;
+    }
+
+    &__currency-switcher {
+        display: flex;
+        gap: 6px;
+        margin-left: auto;
     }
 
     &__cards {

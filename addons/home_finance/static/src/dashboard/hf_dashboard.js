@@ -5,6 +5,8 @@ import { useService } from "@web/core/utils/hooks";
 import { StatCard } from "../components/stat_card/stat_card";
 import { ExpenseChart } from "../components/expense_chart/expense_chart";
 
+const CURRENCY_OPTIONS = ["USD", "UAH"];
+
 function lastNPeriods(currentPeriod, n) {
     const parts = currentPeriod.split("-").map(Number);
     const year = parts[0];
@@ -31,6 +33,7 @@ class HfDashboard extends Component {
 
     setup() {
         this.orm = useService("orm");
+        this.currencyOptions = CURRENCY_OPTIONS;
         this.state = useState({
             loading: true,
             currentPeriod: null,
@@ -40,6 +43,8 @@ class HfDashboard extends Component {
             topCategories: [],
             trendData: [],
             filterMonths: 6,
+            selectedCurrency: "USD",
+            uahRate: 1,
         });
         onWillStart(() => this.loadData());
     }
@@ -56,9 +61,18 @@ class HfDashboard extends Component {
         const period = param ? param.value : null;
         this.state.currentPeriod = period;
 
+        // rate = units of UAH per 1 unit of base currency (USD)
+        const [uahCurrency] = await this.orm.searchRead(
+            "res.currency",
+            [["name", "=", "UAH"]],
+            ["name", "rate"],
+            { limit: 1 }
+        );
+        this.state.uahRate = uahCurrency?.rate || 1;
+
         const balancesResult = await this.orm.webReadGroup(
             "home_finance.wallet.balance",
-            [["amount", "<>", 0],["wallet_id.type", "<>", "invest"]],
+            [["amount", "<>", 0], ["wallet_id.type", "<>", "invest"]],
             ["currency_id"],
             ["amount:sum"]
         );
@@ -111,6 +125,17 @@ class HfDashboard extends Component {
         await this.loadData();
     }
 
+    setCurrency(code) {
+        this.state.selectedCurrency = code;
+    }
+
+    _convert(amount) {
+        if (this.state.selectedCurrency === "UAH") {
+            return amount * this.state.uahRate;
+        }
+        return amount;
+    }
+
     get balanceSummary() {
         if (!this.state.balances.length) return "No data";
         return this.state.balances
@@ -119,18 +144,32 @@ class HfDashboard extends Component {
     }
 
     get formattedExpense() {
-        return this._fmt(this.state.totalExpense);
+        return `${this._fmt(this._convert(this.state.totalExpense))} ${this.state.selectedCurrency}`;
     }
 
     get formattedIncome() {
-        return this._fmt(this.state.totalIncome);
+        return `${this._fmt(this._convert(this.state.totalIncome))} ${this.state.selectedCurrency}`;
     }
 
     get topCategoryName() {
         if (!this.state.topCategories.length) return "None";
         const top = this.state.topCategories[0];
         const name = top.category_id ? top.category_id[1] : "Uncategorized";
-        return `${name} ${this._fmt(top["base_amount:sum"])}`;
+        return `${name} ${this._fmt(this._convert(top["base_amount:sum"]))} ${this.state.selectedCurrency}`;
+    }
+
+    get formattedCategories() {
+        return this.state.topCategories.map((cat) => ({
+            name: cat.category_id ? cat.category_id[1] : "Uncategorized",
+            amount: `${this._fmt(this._convert(cat["base_amount:sum"]))} ${this.state.selectedCurrency}`,
+        }));
+    }
+
+    get chartData() {
+        return this.state.trendData.map((d) => ({
+            period: d.period,
+            base_amount: this._convert(d.base_amount),
+        }));
     }
 
     _fmt(value) {

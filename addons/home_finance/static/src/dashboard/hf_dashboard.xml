@@ -14,6 +14,15 @@
                     <span t-if="state.currentPeriod" class="hf-dashboard__period">
                         Period: <strong t-esc="state.currentPeriod" />
                     </span>
+                    <div class="hf-dashboard__currency-switcher">
+                        <t t-foreach="currencyOptions" t-as="cur" t-key="cur">
+                            <button
+                                t-attf-class="btn btn-sm {{ state.selectedCurrency === cur ? 'btn-secondary' : 'btn-outline-secondary' }}"
+                                t-on-click="() => this.setCurrency(cur)"
+                                t-esc="cur"
+                            />
+                        </t>
+                    </div>
                 </div>
 
                 <div class="hf-dashboard__cards">
@@ -60,7 +69,7 @@
                             </t>
                         </div>
                     </div>
-                    <ExpenseChart data="state.trendData" />
+                    <ExpenseChart data="chartData" />
                 </div>
 
                 <div t-if="state.topCategories.length" class="hf-dashboard__categories">
@@ -73,10 +82,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <t t-foreach="state.topCategories" t-as="cat" t-key="cat_index">
+                            <t t-foreach="formattedCategories" t-as="cat" t-key="cat_index">
                                 <tr>
-                                    <td t-esc="cat.category_id ? cat.category_id[1] : 'Uncategorized'" />
-                                    <td class="text-end" t-esc="cat['base_amount:sum'] ? cat['base_amount:sum'].toLocaleString() : '0'" />
+                                    <td t-esc="cat.name" />
+                                    <td class="text-end" t-esc="cat.amount" />
                                 </tr>
                             </t>
                         </tbody>
