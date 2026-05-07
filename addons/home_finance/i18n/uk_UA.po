@@ -957,3 +957,109 @@ msgstr "Термін зберігання імпорту виписок"
 #: model:ir.cron,name:home_finance.ir_cron_statement_import_cleanup
 msgid "Home Finance: Cleanup Expired Statement Imports"
 msgstr "Домашні фінанси: Очищення застарілих імпортів виписок"
+
+# ---------------------------------------------------------------------------
+# Dashboard (OWL frontend)
+# ---------------------------------------------------------------------------
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Loading dashboard..."
+msgstr "Завантаження дашборда..."
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Home Finance Dashboard"
+msgstr "Дашборд домашніх фінансів"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Period:"
+msgstr "Період:"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Total Balance"
+msgstr "Загальний баланс"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Expenses"
+msgstr "Витрати"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Current period"
+msgstr "Поточний період"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Income"
+msgstr "Доходи"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Top Category"
+msgstr "Топ категорія"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Highest expense"
+msgstr "Найбільша витрата"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Expense Trend"
+msgstr "Тренд витрат"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "months"
+msgstr "міс."
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Top Expense Categories (Current Period)"
+msgstr "Топ категорій витрат (поточний період)"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Category"
+msgstr "Категорія"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Amount"
+msgstr "Сума"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "No data"
+msgstr "Немає даних"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "None"
+msgstr "Немає"
+
+#. module: home_finance
+#. odoo-javascript
+#: code:addons/home_finance/static/src/dashboard/hf_dashboard.js:0
+msgid "Uncategorized"
+msgstr "Без категорії"

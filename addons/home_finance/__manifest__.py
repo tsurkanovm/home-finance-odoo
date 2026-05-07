@@ -7,7 +7,13 @@
         and uploads from your bank statements.
     """,
     'application': True,
-    'depends': ['base', 'base_setup'],
+    'depends': ['base', 'base_setup', 'web'],
+    'assets': {
+        'web.assets_backend': [
+            'home_finance/static/lib/chart.js/chart.umd.min.js',
+            'home_finance/static/src/**/*',
+        ],
+    },
     'data': [
         'data/ir.model.access.csv',
         'data/ir.cron_data.xml',

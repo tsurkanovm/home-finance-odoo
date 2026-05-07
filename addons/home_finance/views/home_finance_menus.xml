@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <menuitem id="hf_menu_root" name="Home Finance" sequence="10">
+        <menuitem id="hf_dashboard_menu"
+                  action="hf_dashboard_action"
+                  sequence="1"
+                  name="Dashboard"/>
         <menuitem id="hf_doc_menu" name="Documents" sequence="10">
             <menuitem id="hf_transaction_model_menu_action"
                       action="hf_transaction_action"

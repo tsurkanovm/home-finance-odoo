@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="home_finance.StatCard">
+        <div t-attf-class="hf-stat-card hf-stat-card--{{ props.variant or 'primary' }}">
+            <div class="hf-stat-card__icon">
+                <i t-if="props.icon" t-attf-class="fa fa-{{ props.icon }}" />
+            </div>
+            <div class="hf-stat-card__body">
+                <div class="hf-stat-card__title" t-esc="props.title" />
+                <div class="hf-stat-card__value" t-esc="props.value" />
+                <div t-if="props.subtitle" class="hf-stat-card__subtitle" t-esc="props.subtitle" />
+            </div>
+        </div>
+    </t>
+</templates>
