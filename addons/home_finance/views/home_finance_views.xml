@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <odoo>
+    <!-- Dashboard client action -->
+    <record id="hf_dashboard_action" model="ir.actions.client">
+        <field name="name">Dashboard</field>
+        <field name="tag">home_finance.dashboard</field>
+    </record>
+
     <!-- Transaction views    -->
     <record id="hf_transaction_income_action" model="ir.actions.act_window">
         <field name="name">Income Transactions</field>
@@ -105,7 +111,7 @@
                 <field name="category_id"/>
                 <field name="project_id"/>
                 <group>
-                    <filter name="period" context="{'group_by': 'period'}"/>
+                    <filter name="period" context="{'group_by': 'period:month'}"/>
                     <filter name="currency_id" context="{'group_by': 'currency_id'}"/>
                     <filter name="type" context="{'group_by': 'type'}"/>
                 </group>
@@ -177,7 +183,7 @@
                         string="Current Period"
                         domain="[('is_current_period', '=', True)]"/>
                 <group>
-                    <filter name="period" context="{'group_by': 'period'}"/>
+                    <filter name="period" context="{'group_by': 'period:month'}"/>
                 </group>
             </search>
         </field>
@@ -477,6 +483,7 @@
             <list edit="0" create="0" delete="0" decoration-danger="amount &lt; 0">
                 <field name="period"/>
                 <field name="wallet_id"/>
+                <button name="action_open_wallet" type="object" icon="fa-external-link" title="Open Wallet"/>
                 <field name="currency_id"/>
                 <field name="amount"/>
             </list>
