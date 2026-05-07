@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="home_finance.Dashboard">
+        <div class="hf-dashboard o_view_controller">
+            <t t-if="state.loading">
+                <div class="hf-dashboard__loading">
+                    <i class="fa fa-spinner fa-spin fa-2x" />
+                    <span>Loading dashboard...</span>
+                </div>
+            </t>
+            <t t-else="">
+                <div class="hf-dashboard__header">
+                    <h2>Home Finance Dashboard</h2>
+                    <span t-if="state.currentPeriod" class="hf-dashboard__period">
+                        Period: <strong t-esc="state.currentPeriod" />
+                    </span>
+                </div>
+
+                <div class="hf-dashboard__cards">
+                    <StatCard
+                        title="'Total Balance'"
+                        value="balanceSummary"
+                        icon="'wallet'"
+                        variant="'primary'"
+                    />
+                    <StatCard
+                        title="'Expenses'"
+                        value="formattedExpense"
+                        subtitle="'Current period'"
+                        icon="'arrow-down'"
+                        variant="'danger'"
+                    />
+                    <StatCard
+                        title="'Income'"
+                        value="formattedIncome"
+                        subtitle="'Current period'"
+                        icon="'arrow-up'"
+                        variant="'success'"
+                    />
+                    <StatCard
+                        title="'Top Category'"
+                        value="topCategoryName"
+                        subtitle="'Highest expense'"
+                        icon="'tag'"
+                        variant="'warning'"
+                    />
+                </div>
+
+                <div class="hf-dashboard__chart-section">
+                    <div class="hf-dashboard__chart-header">
+                        <h3>Expense Trend</h3>
+                        <div class="hf-dashboard__filters">
+                            <t t-foreach="[3, 6, 12]" t-as="months" t-key="months">
+                                <button
+                                    t-attf-class="btn btn-sm {{ state.filterMonths === months ? 'btn-primary' : 'btn-outline-primary' }}"
+                                    t-on-click="() => this.setFilter(months)"
+                                >
+                                    <t t-esc="months" /> months
+                                </button>
+                            </t>
+                        </div>
+                    </div>
+                    <ExpenseChart data="state.trendData" />
+                </div>
+
+                <div t-if="state.topCategories.length" class="hf-dashboard__categories">
+                    <h3>Top Expense Categories (Current Period)</h3>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th class="text-end">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="state.topCategories" t-as="cat" t-key="cat_index">
+                                <tr>
+                                    <td t-esc="cat.category_id ? cat.category_id[1] : 'Uncategorized'" />
+                                    <td class="text-end" t-esc="cat['base_amount:sum'] ? cat['base_amount:sum'].toLocaleString() : '0'" />
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>
