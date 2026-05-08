@@ -45,7 +45,7 @@ class HfDashboard extends Component {
             topCategories: [],
             trendData: [],
             filterMonths: 6,
-            selectedCurrency: "USD",
+            selectedCurrency: "UAH",
             uahRate: 1,
         });
         onWillStart(() => this.loadData());
@@ -53,14 +53,12 @@ class HfDashboard extends Component {
 
     async loadData() {
         this.state.loading = true;
-
-        const [param] = await this.orm.searchRead(
-            "ir.config_parameter",
-            [["key", "=", "home_finance.current_period"]],
-            ["value"],
-            { limit: 1 }
-        );
-        const period = param ? param.value : null;
+         const config = await this.orm.call(
+        "home.finance.dashboard.service",
+        "get_config",
+        []
+    );
+        const period = config ? config.current_period : null;
         this.state.currentPeriod = period;
 
         // rate = units of UAH per 1 unit of base currency (USD)

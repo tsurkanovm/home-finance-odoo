@@ -11,3 +11,4 @@ from . import home_finance_statement_import_rule
 from . import home_finance_statement_import_rule_line
 from . import res_config_settings
 from . import home_finance_wallet_balance
+from . import home_finance_dashboard_service
