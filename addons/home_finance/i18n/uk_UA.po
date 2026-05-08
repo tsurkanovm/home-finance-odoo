@@ -765,6 +765,21 @@ msgid "Import Bank Statement"
 msgstr "Імпорт банківської виписки"
 
 #. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_dashboard_menu
+msgid "Dashboard"
+msgstr "Дашборд"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_service_sub_menu
+msgid "Services"
+msgstr "Сервіси"
+
+#. module: home_finance
+#: model:ir.ui.menu,name:home_finance.hf_setting_directory_sub_menu
+msgid "Directories"
+msgstr "Довідники"
+
+#. module: home_finance
 #: model:ir.ui.menu,name:home_finance.hf_wallet_balance_recalculate_menu
 msgid "Recalculate Balance"
 msgstr "Перерахувати баланс"

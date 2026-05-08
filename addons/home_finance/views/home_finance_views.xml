@@ -52,16 +52,16 @@
         <field name="model">home_finance.transaction</field>
         <field name="arch" type="xml">
             <list decoration-danger="type == 'expense'"
-                  decoration-success="type == 'income'" edit="1">
-                <field name="period"/>
-                <field name="type"/>
-                <field name="wallet_id"/>
+                  decoration-success="type == 'income'" editable="top">
+                <field name="period" readonly="1"/>
+                <field name="type" readonly="1"/>
+                <field name="wallet_id" readonly="1"/>
                 <field name="category_id"/>
-                <field name="currency_id"/>
+                <field name="currency_id" readonly="1"/>
                 <field name="amount"/>
                 <field name="project_id"/>
                 <field name="comment" optional="hide"/>
-                <field name="create_date" optional="hide"/>
+                <field name="create_date" optional="hide" readonly="1"/>
             </list>
         </field>
     </record>
@@ -480,12 +480,11 @@
         <field name="name">home_finance.wallet.balance.view.list</field>
         <field name="model">home_finance.wallet.balance</field>
         <field name="arch" type="xml">
-            <list edit="0" create="0" delete="0" decoration-danger="amount &lt; 0">
-                <field name="period"/>
-                <field name="wallet_id"/>
-                <button name="action_open_wallet" type="object" icon="fa-external-link" title="Open Wallet"/>
-                <field name="currency_id"/>
-                <field name="amount"/>
+            <list editable="top" create="0" delete="0" decoration-danger="amount &lt; 0">
+                <field name="period" readonly="1"/>
+                <field name="wallet_id" readonly="1"/>
+                <field name="currency_id" readonly="1"/>
+                <field name="amount" readonly="1"/>
             </list>
         </field>
     </record>
