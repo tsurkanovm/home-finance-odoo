@@ -55,15 +55,6 @@ class WalletBalance(models.Model):
         )
 
 
-    def action_open_wallet(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'home_finance.wallet',
-            'res_id': self.wallet_id.id,
-            'view_mode': 'form',
-            'target': 'current',
-        }
-
     @api.depends('amount', 'currency_id', 'base_currency_id', 'period')
     def _compute_base_amount(self):
         for record in self:
