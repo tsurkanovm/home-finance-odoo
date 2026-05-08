@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <menuitem id="magento_integrator_runner_menu"
-              parent="home_finance.hf_setting_menu"
+              parent="home_finance.hf_service_sub_menu"
               action="magento_integrator_runner_wizard_action"
               sequence="120"
               name="Magento Data Import"/>
