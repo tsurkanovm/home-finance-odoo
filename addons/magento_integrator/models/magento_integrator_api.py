@@ -1,4 +1,5 @@
 import logging
+from typing import Any
 
 import requests
 
@@ -25,7 +26,10 @@ class MagentoIntegratorApi(models.AbstractModel):
         }
 
     def _request(self, method, endpoint, params=None, payload=None):
-        config = self._get_config()
+        if self.env.user.has_group("base.user_admin"):
+            config = self._get_config()
+        else:
+            raise UserError(_("You do not have permissions to access Magento API."))
 
         if not config["base_url"]:
             raise UserError(_("Magento Base URL is missing."))
@@ -80,6 +84,7 @@ class MagentoIntegratorApi(models.AbstractModel):
         return self._request("GET", TRANSFER_ALL_URL)
 
     def get_project_all(self):
+        self._check_access()
         # hardcoded project data, cause M2 does not have endpoint and we have just few projects
         return [
             {"id": 1, "title": "Invest to Forex"},
@@ -94,3 +99,7 @@ class MagentoIntegratorApi(models.AbstractModel):
             {"id": 11, "title": "IBK"},
             {"id": 12, "title": "YouTube"},
         ]
+
+    def _check_access(self) -> None:
+        if not self.env.user.has_group("base.user_admin"):
+            raise UserError(_("You do not have permissions to access Magento API."))
